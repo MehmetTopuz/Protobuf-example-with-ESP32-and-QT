@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package hydroponicData;
+
+enum MessageType {
+    MSG_HEART_BEAT = 0;
+    MSG_OK = 1;
+    MSG_ERROR = 2;
+    MSG_DATA = 3;
+    MSG_TIMEOUT = 4;
+}
+
+message hDataPacket {
+    MessageType messageType = 1;
+    uint32 deviceID = 2;
+    optional string sector = 3;
+    optional float eConductivity = 4;
+    optional float ph = 5;
+    optional float moisture = 6;
+    optional float temperature = 7;
+    optional uint32 waterLevel = 8;
+    optional bool valveState = 9;
+    optional bool pumpState = 10;
+    optional bool ledStatus = 11;
+}
