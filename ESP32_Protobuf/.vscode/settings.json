@@ -1,6 +1,12 @@
 {
     "idf.portWin": "COM4",
     "files.associations": {
-        "sdkconfig.h": "c"
+        "sdkconfig.h": "c",
+        "pb_common.h": "c",
+        "pb_decode.h": "c",
+        "pb_encode.h": "c",
+        "hydroponic_data.pb.h": "c",
+        "atomic": "c",
+        "cstdint": "c"
     }
 }

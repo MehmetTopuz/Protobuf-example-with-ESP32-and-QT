@@ -3,6 +3,12 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "hydroponic_data.pb.h"
+#include "pb.h"
+#include "pb_common.h"
+#include "pb_decode.h"
+#include "pb_encode.h"
+
 
 #define TASKS_TO_CREATE     ((size_t)(sizeof(TaskConfigArr) / sizeof(TaskConfigArr[0])))
 #define SERVER_IP           "192.168.38.188"
@@ -21,6 +27,7 @@ typedef struct {
 void initalizeTasks(void);
 void udpClientTask(void *param);
 void udpReceiveTask(void *param);
-
+int serializeData(uint8_t *buffer, size_t len);
+int deSerializeData(uint8_t *buffer, size_t len);
 
 #endif
