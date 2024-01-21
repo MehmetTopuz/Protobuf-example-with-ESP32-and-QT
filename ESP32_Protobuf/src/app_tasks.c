@@ -23,11 +23,11 @@
 #include "pb_encode.h"
 
 static const char *TAG = "ESP32";
-static const char *payload = "Message from ESP32 ";
+
+// Task configuration table: Add task properties to this array when you want to create a new task.
 
 TaskConfig_t TaskConfigArr[] = {
-    {(TaskFunction_t)udpClientTask, "UDP Client Task", 4096, NULL, 0, NULL},
-    {(TaskFunction_t)udpReceiveTask, "UDP Receive Task", 4096, NULL, 0, NULL}
+    {(TaskFunction_t)udpClientTask, "UDP Client Task", 4096, NULL, 0, NULL}
 };
 
 
@@ -56,6 +56,8 @@ void udpClientTask(void *param){
     int addr_family = 0;
     int ip_protocol = 0;
     uint8_t buffer[128] = {0};
+    hydroponicData_hDataPacket messageToSend = hydroponicData_hDataPacket_init_zero;
+
     while (1) {
         struct sockaddr_in dest_addr;
         dest_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
@@ -80,7 +82,10 @@ void udpClientTask(void *param){
 
         while (1) {
 
-            int size = serializeData(buffer, sizeof(buffer));
+            generateSampleHydroponicData(&messageToSend);
+
+            int size = serializeData(buffer, sizeof(buffer), &messageToSend);
+            ESP_LOGI(TAG, "Size: %d", size);
             int err = sendto(sock, buffer, size, 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
             if (err < 0) {
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
@@ -88,7 +93,8 @@ void udpClientTask(void *param){
             }
             ESP_LOGI(TAG, "Message sent");
 
-            deSerializeData(buffer, size);
+            // Decode the serialized data to verify that encoding is successful.
+            deSerializeData(buffer,size);
             vTaskDelay(pdMS_TO_TICKS(1000));
 
 
@@ -103,14 +109,6 @@ void udpClientTask(void *param){
     vTaskDelete(NULL);
 }
 
-void udpReceiveTask(void *param){
-
-    
-    while(1){
-
-
-    }
-}
 bool write_string(pb_ostream_t *stream, const pb_field_iter_t *field, void * const *arg)
 {
     if (!pb_encode_tag_for_field(stream, field))
@@ -121,7 +119,7 @@ bool write_string(pb_ostream_t *stream, const pb_field_iter_t *field, void * con
 
 bool read_string(pb_istream_t *stream, const pb_field_t *field, void **arg)
 {
-    uint8_t buffer[20] = {0};
+    uint8_t buffer[128] = {0};
     
     /* We could read block-by-block to avoid the large buffer... */
     if (stream->bytes_left > sizeof(buffer) - 1)
@@ -137,32 +135,55 @@ bool read_string(pb_istream_t *stream, const pb_field_t *field, void **arg)
 }
 
 
-int serializeData(uint8_t *buffer, size_t len){
-
-    hydroponicData_hDataPacket message = hydroponicData_hDataPacket_init_zero;
-
-    message.messageType = hydroponicData_MessageType_MSG_DATA;
-    message.deviceID = 1;
-    message.sector.arg = "Sector-1";
-    message.sector.funcs.encode =& write_string;
+int serializeData(uint8_t *buffer, size_t len, hydroponicData_hDataPacket *message){
 
     pb_ostream_t ostream = pb_ostream_from_buffer(buffer, len);
 
-    pb_encode(&ostream, hydroponicData_hDataPacket_fields, &message);
+    pb_encode(&ostream, hydroponicData_hDataPacket_fields, message);
 
     return ostream.bytes_written;
+    
 }
 
 int deSerializeData(uint8_t *buffer, size_t len){
 
-    hydroponicData_hDataPacket receivedMessage =hydroponicData_hDataPacket_init_zero;
+    hydroponicData_hDataPacket receivedMessage = hydroponicData_hDataPacket_init_zero;
     pb_istream_t istream = pb_istream_from_buffer(buffer, len);
     receivedMessage.sector.funcs.decode =& read_string;
     receivedMessage.sector.arg = malloc(10*sizeof(char));
-    pb_decode(&istream, hydroponicData_hDataPacket_fields, &receivedMessage); 
+    bool ret = pb_decode(&istream, hydroponicData_hDataPacket_fields, &receivedMessage); 
 
+    if(!ret)
+        ESP_LOGI(TAG, "Decode Error.");
     ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.messageType);
     ESP_LOGI(TAG, "Decoded message: %ld", receivedMessage.deviceID);
-    ESP_LOGI(TAG, "Decoded message: %s", (char*)receivedMessage.sector.arg); // burada program çöküyor.
+    ESP_LOGI(TAG, "Decoded message: %s", (char*)receivedMessage.sector.arg); 
+    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.eConductivity); 
+    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.ph); 
+    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.moisture); 
+    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.temperature); 
+    ESP_LOGI(TAG, "Decoded message: %ld", receivedMessage.waterLevel); 
+    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.valveState); 
+    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.pumpState); 
+    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.ledStatus); 
     return 1;
+}
+
+void generateSampleHydroponicData(hydroponicData_hDataPacket *message){
+
+    message->messageType = hydroponicData_MessageType_MSG_DATA;
+    message->deviceID = 10;
+    message->sector.arg = "Sector-1";
+    message->sector.funcs.encode =& write_string;
+    
+    if(message->eConductivity >= 20.0f) message->eConductivity = 0.0f; else message->eConductivity += 1.0f;
+    if(message->ph >= 14.0f) message->ph = 0.0f; else message->ph += 0.1f;
+    if(message->moisture >= 50.0f) message->moisture = 10.0f; else message->moisture += 1.0f;
+    if(message->temperature >= 30.0f) message->temperature = 10.0f; else message->temperature += 1.0f;
+    if(message->waterLevel >= 100) message->waterLevel = 0; else message->waterLevel += 5;
+    if(message->waterLevel >= 100) message->valveState = false; else message->valveState = true;
+
+    message->pumpState = false;
+    message->ledStatus = true;
+
 }

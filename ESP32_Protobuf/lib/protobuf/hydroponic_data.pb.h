@@ -23,21 +23,13 @@ typedef struct _hydroponicData_hDataPacket {
     hydroponicData_MessageType messageType;
     uint32_t deviceID;
     pb_callback_t sector;
-    bool has_eConductivity;
     float eConductivity;
-    bool has_ph;
     float ph;
-    bool has_moisture;
     float moisture;
-    bool has_temperature;
     float temperature;
-    bool has_waterLevel;
     uint32_t waterLevel;
-    bool has_valveState;
     bool valveState;
-    bool has_pumpState;
     bool pumpState;
-    bool has_ledStatus;
     bool ledStatus;
 } hydroponicData_hDataPacket;
 
@@ -55,8 +47,8 @@ extern "C" {
 
 
 /* Initializer values for message structs */
-#define hydroponicData_hDataPacket_init_default  {_hydroponicData_MessageType_MIN, 0, {{NULL}, NULL}, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0}
-#define hydroponicData_hDataPacket_init_zero     {_hydroponicData_MessageType_MIN, 0, {{NULL}, NULL}, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0, false, 0}
+#define hydroponicData_hDataPacket_init_default  {_hydroponicData_MessageType_MIN, 0, {{NULL}, NULL}, 0, 0, 0, 0, 0, 0, 0, 0}
+#define hydroponicData_hDataPacket_init_zero     {_hydroponicData_MessageType_MIN, 0, {{NULL}, NULL}, 0, 0, 0, 0, 0, 0, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define hydroponicData_hDataPacket_messageType_tag 1
@@ -75,15 +67,15 @@ extern "C" {
 #define hydroponicData_hDataPacket_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    messageType,       1) \
 X(a, STATIC,   SINGULAR, UINT32,   deviceID,          2) \
-X(a, CALLBACK, OPTIONAL, STRING,   sector,            3) \
-X(a, STATIC,   OPTIONAL, FLOAT,    eConductivity,     4) \
-X(a, STATIC,   OPTIONAL, FLOAT,    ph,                5) \
-X(a, STATIC,   OPTIONAL, FLOAT,    moisture,          6) \
-X(a, STATIC,   OPTIONAL, FLOAT,    temperature,       7) \
-X(a, STATIC,   OPTIONAL, UINT32,   waterLevel,        8) \
-X(a, STATIC,   OPTIONAL, BOOL,     valveState,        9) \
-X(a, STATIC,   OPTIONAL, BOOL,     pumpState,        10) \
-X(a, STATIC,   OPTIONAL, BOOL,     ledStatus,        11)
+X(a, CALLBACK, SINGULAR, STRING,   sector,            3) \
+X(a, STATIC,   SINGULAR, FLOAT,    eConductivity,     4) \
+X(a, STATIC,   SINGULAR, FLOAT,    ph,                5) \
+X(a, STATIC,   SINGULAR, FLOAT,    moisture,          6) \
+X(a, STATIC,   SINGULAR, FLOAT,    temperature,       7) \
+X(a, STATIC,   SINGULAR, UINT32,   waterLevel,        8) \
+X(a, STATIC,   SINGULAR, BOOL,     valveState,        9) \
+X(a, STATIC,   SINGULAR, BOOL,     pumpState,        10) \
+X(a, STATIC,   SINGULAR, BOOL,     ledStatus,        11)
 #define hydroponicData_hDataPacket_CALLBACK pb_default_field_callback
 #define hydroponicData_hDataPacket_DEFAULT NULL
 

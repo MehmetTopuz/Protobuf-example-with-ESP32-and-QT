@@ -13,13 +13,13 @@ enum MessageType {
 message hDataPacket {
     MessageType messageType = 1;
     uint32 deviceID = 2;
-    optional string sector = 3;
-    optional float eConductivity = 4;
-    optional float ph = 5;
-    optional float moisture = 6;
-    optional float temperature = 7;
-    optional uint32 waterLevel = 8;
-    optional bool valveState = 9;
-    optional bool pumpState = 10;
-    optional bool ledStatus = 11;
+    string sector = 3;
+    float eConductivity = 4;
+    float ph = 5;
+    float moisture = 6;
+    float temperature = 7;
+    uint32 waterLevel = 8;
+    bool valveState = 9;
+    bool pumpState = 10;
+    bool ledStatus = 11;
 }

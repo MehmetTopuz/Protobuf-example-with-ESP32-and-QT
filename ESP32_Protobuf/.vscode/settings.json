@@ -7,6 +7,10 @@
         "pb_encode.h": "c",
         "hydroponic_data.pb.h": "c",
         "atomic": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "system_error": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }
