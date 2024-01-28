@@ -30,7 +30,7 @@ Window {
     Component{
         id:dataMonitorPage
 
-        DataMonitor{
+        DataMonitorPage{
             id:dataMonitor
 
         }

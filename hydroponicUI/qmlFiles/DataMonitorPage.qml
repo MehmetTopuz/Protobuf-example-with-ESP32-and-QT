@@ -36,16 +36,33 @@ Item {
 
         }
 
-//        Timer{
-//            interval: 50
-//            running: true
-//            repeat: true
-//            onTriggered: {
-//                if(waterLevel.level != 100)
-//                    waterLevel.level++
-//                else
-//                    waterLevel.level=0
-//            }
-//        }
+        TemperatureIndicator{
+            id:temperature
+            anchors.top: topBarDataMonitor.bottom
+            anchors.topMargin: 50
+            anchors.left: waterLevel.right
+            anchors.leftMargin: 50
+            width: 300
+            height: 300
+
+            temperatureVal: 0
+        }
+
+        Timer{
+            interval: 50
+            running: true
+            repeat: true
+            onTriggered: {
+                if(waterLevel.level != 100)
+                    waterLevel.level++
+                else
+                    waterLevel.level=0
+
+                if(temperature.temperatureVal != 30)
+                    temperature.temperatureVal++
+                else
+                    temperature.temperatureVal=0
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qmlFiles/DataMonitor.qml</file>
+        <file>qmlFiles/DataMonitorPage.qml</file>
         <file>qmlFiles/CustomTopBar.qml</file>
         <file>icons/close.png</file>
         <file>icons/hydroponic_icon.png</file>
@@ -10,5 +10,7 @@
         <file>icons/minus.png</file>
         <file>qmlFiles/WaterLevelIndicator.qml</file>
         <file>icons/reservoir.png</file>
+        <file>qmlFiles/TemperatureIndicator.qml</file>
+        <file>icons/temperature.png</file>
     </qresource>
 </RCC>
