@@ -1,5 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>qmlFiles/DataMonitor.qml</file>
+        <file>qmlFiles/CustomTopBar.qml</file>
+        <file>icons/close.png</file>
+        <file>icons/hydroponic_icon.png</file>
+        <file>icons/maximize.png</file>
+        <file>icons/restore-down.png</file>
+        <file>icons/minus.png</file>
     </qresource>
 </RCC>
