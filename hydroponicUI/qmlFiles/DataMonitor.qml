@@ -22,5 +22,30 @@ Item {
             id: topBarDataMonitor
             fullscreenFlag: true
         }
+
+        WaterLevelIndicator{
+            id: waterLevel
+            anchors.top: topBarDataMonitor.bottom
+            anchors.topMargin: 50
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            width: 300
+            height: 300
+
+            level: 0
+
+        }
+
+//        Timer{
+//            interval: 50
+//            running: true
+//            repeat: true
+//            onTriggered: {
+//                if(waterLevel.level != 100)
+//                    waterLevel.level++
+//                else
+//                    waterLevel.level=0
+//            }
+//        }
     }
 }

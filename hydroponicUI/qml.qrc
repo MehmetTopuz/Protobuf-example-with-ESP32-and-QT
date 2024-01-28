@@ -8,5 +8,7 @@
         <file>icons/maximize.png</file>
         <file>icons/restore-down.png</file>
         <file>icons/minus.png</file>
+        <file>qmlFiles/WaterLevelIndicator.qml</file>
+        <file>icons/reservoir.png</file>
     </qresource>
 </RCC>
