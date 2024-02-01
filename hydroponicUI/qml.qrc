@@ -14,5 +14,7 @@
         <file>icons/temperature.png</file>
         <file>qmlFiles/PhIndicator.qml</file>
         <file>icons/ph.png</file>
+        <file>icons/moisture.png</file>
+        <file>qmlFiles/MoistureIndicator.qml</file>
     </qresource>
 </RCC>

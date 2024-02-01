@@ -59,6 +59,15 @@ Item {
 
             phVal: 7.5
 
+        }
+
+        MoistureIndicator{
+            id: moisture
+            anchors.top: waterLevel.bottom
+            anchors.topMargin: 100
+            anchors.horizontalCenter: waterLevel.horizontalCenter
+
+            moistureVal: 25
 
         }
 
@@ -67,15 +76,20 @@ Item {
             running: true
             repeat: true
             onTriggered: {
-                if(waterLevel.level != 100)
+                if(waterLevel.level != 100){
+                    moisture.moistureVal++
                     waterLevel.level++
-                else
+                }
+                else{
+                    moisture.moistureVal=0
                     waterLevel.level=0
+                }
 
                 if(temperature.temperatureVal != 30)
                     temperature.temperatureVal++
                 else
                     temperature.temperatureVal=0
+
             }
         }
     }
