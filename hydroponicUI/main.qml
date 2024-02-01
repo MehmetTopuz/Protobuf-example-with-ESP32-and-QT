@@ -13,7 +13,7 @@ Window {
     color: "transparent"
     flags: Qt.FramelessWindowHint | Qt.Window
 
-    title: qsTr("Smart Hydroponic")
+    title: qsTr("Smart Hydroponic Demo")
 
     Loader{
         id: pageLoaderObj

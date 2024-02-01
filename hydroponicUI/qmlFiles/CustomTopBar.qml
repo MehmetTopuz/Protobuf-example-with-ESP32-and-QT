@@ -82,7 +82,7 @@ Rectangle {
         id: topBarAppName
         width: parent.height
         height: parent.height
-        text: "Smart Hydroponic"
+        text: "Smart Hydroponic Demo"
         color: "black"
         font.pointSize: 10
         anchors.left: topBarLogo.right

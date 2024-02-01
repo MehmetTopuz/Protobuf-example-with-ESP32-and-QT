@@ -12,5 +12,7 @@
         <file>icons/reservoir.png</file>
         <file>qmlFiles/TemperatureIndicator.qml</file>
         <file>icons/temperature.png</file>
+        <file>qmlFiles/PhIndicator.qml</file>
+        <file>icons/ph.png</file>
     </qresource>
 </RCC>

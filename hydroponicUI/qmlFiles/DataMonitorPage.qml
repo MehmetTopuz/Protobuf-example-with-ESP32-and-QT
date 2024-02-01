@@ -48,6 +48,20 @@ Item {
             temperatureVal: 0
         }
 
+        PhIndicator{
+            id:ph
+            anchors.top: topBarDataMonitor.bottom
+            anchors.topMargin: 50
+            anchors.left: temperature.right
+            anchors.leftMargin: 50
+            width: 300
+            height: 300
+
+            phVal: 7.5
+
+
+        }
+
         Timer{
             interval: 50
             running: true
