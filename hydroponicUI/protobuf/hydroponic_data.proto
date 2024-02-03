@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package hydroponic;
+
+enum MessageType {
+    MSG_HEART_BEAT = 0;
+    MSG_OK = 1;
+    MSG_ERROR = 2;
+    MSG_DATA = 3;
+    MSG_TIMEOUT = 4;
+}
+
+message Hydroponic {
+	MessageType messageType = 1;
+	
+	oneof msg {
+		DataPackage dataPackage = 2;
+		HeartBeat heartBeat = 3;
+		MessageOk messageOk = 4;
+		MessageError messageError = 5;
+		MessageTimeout messageTimeout = 6;
+	}	
+}
+
+message DataPackage {
+    MessageType messageType = 1;
+    uint32 deviceID = 2;
+    string sector = 3;
+    float eConductivity = 4;
+    float ph = 5;
+    float moisture = 6;
+    float temperature = 7;
+    uint32 waterLevel = 8;
+    bool valveState = 9;
+    bool pumpState = 10;
+    bool ledStatus = 11;
+}
+
+message HeartBeat {
+	uint32 elapsedTime = 1;
+}
+
+message MessageOk {
+	string responseMessage = 1;
+}
+
+message MessageError {
+	string errorType = 1;
+}
+
+message MessageTimeout {
+	string timeoutMessage = 1;
+}

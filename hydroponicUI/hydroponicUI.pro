@@ -9,6 +9,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
+QMAKE_CXXFLAGS_DEBUG += /MTd
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -19,3 +21,12 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/protobuf/ -llibprotobuf
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/protobuf/ -llibprotobufd
+else:unix: LIBS += -L$$PWD/protobuf/ -llibprotobuf
+
+INCLUDEPATH += $$PWD/protobuf
+INCLUDEPATH += $$PWD/protobuf/include
+DEPENDPATH += $$PWD/protobuf
