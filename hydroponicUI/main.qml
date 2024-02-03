@@ -5,7 +5,7 @@ import "qmlFiles"
 
 Window {
     id: mainWindow
-    width: 1280
+    width: 1600
     height: 960
     visible: true
     minimumHeight: 480

@@ -4,6 +4,7 @@ Item {
     id: temperatureItem
 
     property int temperatureVal: 0
+    property string temperatureLabel: "None"
     Rectangle{
         id: temperatureBackgroundRect
         width: parent.width
@@ -12,7 +13,7 @@ Item {
 
         Text {
             id: waterLevelText
-            text: qsTr("Temperature")
+            text: temperatureLabel
             font.pointSize: 15
             anchors.bottom: temperatureImage.top
             anchors.bottomMargin: 5

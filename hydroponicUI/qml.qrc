@@ -14,7 +14,18 @@
         <file>icons/temperature.png</file>
         <file>qmlFiles/PhIndicator.qml</file>
         <file>icons/ph.png</file>
-        <file>icons/moisture.png</file>
-        <file>qmlFiles/MoistureIndicator.qml</file>
+        <file>qmlFiles/HumidityIndicator.qml</file>
+        <file>qmlFiles/EConductivityIndicator.qml</file>
+        <file>icons/humidity.png</file>
+        <file>icons/flash.png</file>
+        <file>qmlFiles/PumpIndicator.qml</file>
+        <file>icons/gear.png</file>
+        <file>icons/pump.png</file>
+        <file>icons/valve.png</file>
+        <file>qmlFiles/ValveIndicator.qml</file>
+        <file>icons/switch-off.png</file>
+        <file>icons/switch-on.png</file>
+        <file>qmlFiles/CustomButton.qml</file>
+        <file>icons/greenhouse.jpg</file>
     </qresource>
 </RCC>

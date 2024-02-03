@@ -4,6 +4,7 @@ Item {
     id: phItem
 
     property double phVal: 0.0
+    property string phLabel: "None"
 
     Rectangle{
         id: phBackgroundRect
@@ -13,7 +14,7 @@ Item {
 
         Text {
             id: phText
-            text: qsTr("Ph Level")
+            text: phLabel
             font.pointSize: 15
             anchors.bottom: phImage.top
             anchors.bottomMargin: 15

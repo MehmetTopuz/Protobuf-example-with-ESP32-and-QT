@@ -3,7 +3,8 @@ import QtQuick 2.0
 Item {
     id: waterLevelIndicatorItem
 
-    property int level: 0     // water level percent
+    property int level: 0
+    property string waterLevelLabel: "None"
 
     Rectangle{
         id: waterLevelBackgroundRect
@@ -13,7 +14,7 @@ Item {
 
         Text {
             id: waterLevelText
-            text: qsTr("Water Level")
+            text: waterLevelLabel
             font.pointSize: 15
             anchors.bottom: waterTankImg.top
             anchors.bottomMargin: 5
