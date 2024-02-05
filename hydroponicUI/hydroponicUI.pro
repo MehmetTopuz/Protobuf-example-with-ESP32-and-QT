@@ -1,10 +1,12 @@
 QT += quick
+QT += network
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        UdpHandler/udphandler.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -30,3 +32,6 @@ else:unix: LIBS += -L$$PWD/protobuf/ -llibprotobuf
 INCLUDEPATH += $$PWD/protobuf
 INCLUDEPATH += $$PWD/protobuf/include
 DEPENDPATH += $$PWD/protobuf
+
+HEADERS += \
+    UdpHandler/udphandler.h
