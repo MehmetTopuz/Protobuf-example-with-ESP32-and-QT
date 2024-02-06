@@ -487,7 +487,6 @@ class DataPackage PROTOBUF_FINAL :
 
   enum : int {
     kSectorFieldNumber = 3,
-    kMessageTypeFieldNumber = 1,
     kDeviceIDFieldNumber = 2,
     kEConductivityFieldNumber = 4,
     kPhFieldNumber = 5,
@@ -512,15 +511,6 @@ class DataPackage PROTOBUF_FINAL :
   const std::string& _internal_sector() const;
   void _internal_set_sector(const std::string& value);
   std::string* _internal_mutable_sector();
-  public:
-
-  // .hydroponic.MessageType messageType = 1;
-  void clear_messagetype();
-  ::hydroponic::MessageType messagetype() const;
-  void set_messagetype(::hydroponic::MessageType value);
-  private:
-  ::hydroponic::MessageType _internal_messagetype() const;
-  void _internal_set_messagetype(::hydroponic::MessageType value);
   public:
 
   // uint32 deviceID = 2;
@@ -612,7 +602,6 @@ class DataPackage PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sector_;
-  int messagetype_;
   ::PROTOBUF_NAMESPACE_ID::uint32 deviceid_;
   float econductivity_;
   float ph_;
@@ -1598,26 +1587,6 @@ inline Hydroponic::MsgCase Hydroponic::msg_case() const {
 // -------------------------------------------------------------------
 
 // DataPackage
-
-// .hydroponic.MessageType messageType = 1;
-inline void DataPackage::clear_messagetype() {
-  messagetype_ = 0;
-}
-inline ::hydroponic::MessageType DataPackage::_internal_messagetype() const {
-  return static_cast< ::hydroponic::MessageType >(messagetype_);
-}
-inline ::hydroponic::MessageType DataPackage::messagetype() const {
-  // @@protoc_insertion_point(field_get:hydroponic.DataPackage.messageType)
-  return _internal_messagetype();
-}
-inline void DataPackage::_internal_set_messagetype(::hydroponic::MessageType value) {
-  
-  messagetype_ = value;
-}
-inline void DataPackage::set_messagetype(::hydroponic::MessageType value) {
-  _internal_set_messagetype(value);
-  // @@protoc_insertion_point(field_set:hydroponic.DataPackage.messageType)
-}
 
 // uint32 deviceID = 2;
 inline void DataPackage::clear_deviceid() {

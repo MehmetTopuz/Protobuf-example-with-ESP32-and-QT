@@ -150,7 +150,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_hydroponic_5fdata_2eproto::off
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::hydroponic::DataPackage, messagetype_),
   PROTOBUF_FIELD_OFFSET(::hydroponic::DataPackage, deviceid_),
   PROTOBUF_FIELD_OFFSET(::hydroponic::DataPackage, sector_),
   PROTOBUF_FIELD_OFFSET(::hydroponic::DataPackage, econductivity_),
@@ -189,10 +188,10 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_hydroponic_5fdata_2eproto::off
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::hydroponic::Hydroponic)},
   { 12, -1, sizeof(::hydroponic::DataPackage)},
-  { 28, -1, sizeof(::hydroponic::HeartBeat)},
-  { 34, -1, sizeof(::hydroponic::MessageOk)},
-  { 40, -1, sizeof(::hydroponic::MessageError)},
-  { 46, -1, sizeof(::hydroponic::MessageTimeout)},
+  { 27, -1, sizeof(::hydroponic::HeartBeat)},
+  { 33, -1, sizeof(::hydroponic::MessageOk)},
+  { 39, -1, sizeof(::hydroponic::MessageError)},
+  { 45, -1, sizeof(::hydroponic::MessageTimeout)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -213,20 +212,18 @@ const char descriptor_table_protodef_hydroponic_5fdata_2eproto[] PROTOBUF_SECTIO
   "k\030\004 \001(\0132\025.hydroponic.MessageOkH\000\0220\n\014mess"
   "ageError\030\005 \001(\0132\030.hydroponic.MessageError"
   "H\000\0224\n\016messageTimeout\030\006 \001(\0132\032.hydroponic."
-  "MessageTimeoutH\000B\005\n\003msg\"\365\001\n\013DataPackage\022"
-  ",\n\013messageType\030\001 \001(\0162\027.hydroponic.Messag"
-  "eType\022\020\n\010deviceID\030\002 \001(\r\022\016\n\006sector\030\003 \001(\t\022"
-  "\025\n\reConductivity\030\004 \001(\002\022\n\n\002ph\030\005 \001(\002\022\020\n\010mo"
-  "isture\030\006 \001(\002\022\023\n\013temperature\030\007 \001(\002\022\022\n\nwat"
-  "erLevel\030\010 \001(\r\022\022\n\nvalveState\030\t \001(\010\022\021\n\tpum"
-  "pState\030\n \001(\010\022\021\n\tledStatus\030\013 \001(\010\" \n\tHeart"
-  "Beat\022\023\n\013elapsedTime\030\001 \001(\r\"$\n\tMessageOk\022\027"
-  "\n\017responseMessage\030\001 \001(\t\"!\n\014MessageError\022"
-  "\021\n\terrorType\030\001 \001(\t\"(\n\016MessageTimeout\022\026\n\016"
-  "timeoutMessage\030\001 \001(\t*[\n\013MessageType\022\022\n\016M"
-  "SG_HEART_BEAT\020\000\022\n\n\006MSG_OK\020\001\022\r\n\tMSG_ERROR"
-  "\020\002\022\014\n\010MSG_DATA\020\003\022\017\n\013MSG_TIMEOUT\020\004b\006proto"
-  "3"
+  "MessageTimeoutH\000B\005\n\003msg\"\307\001\n\013DataPackage\022"
+  "\020\n\010deviceID\030\002 \001(\r\022\016\n\006sector\030\003 \001(\t\022\025\n\reCo"
+  "nductivity\030\004 \001(\002\022\n\n\002ph\030\005 \001(\002\022\020\n\010moisture"
+  "\030\006 \001(\002\022\023\n\013temperature\030\007 \001(\002\022\022\n\nwaterLeve"
+  "l\030\010 \001(\r\022\022\n\nvalveState\030\t \001(\010\022\021\n\tpumpState"
+  "\030\n \001(\010\022\021\n\tledStatus\030\013 \001(\010\" \n\tHeartBeat\022\023"
+  "\n\013elapsedTime\030\001 \001(\r\"$\n\tMessageOk\022\027\n\017resp"
+  "onseMessage\030\001 \001(\t\"!\n\014MessageError\022\021\n\terr"
+  "orType\030\001 \001(\t\"(\n\016MessageTimeout\022\026\n\016timeou"
+  "tMessage\030\001 \001(\t*[\n\013MessageType\022\022\n\016MSG_HEA"
+  "RT_BEAT\020\000\022\n\n\006MSG_OK\020\001\022\r\n\tMSG_ERROR\020\002\022\014\n\010"
+  "MSG_DATA\020\003\022\017\n\013MSG_TIMEOUT\020\004b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_hydroponic_5fdata_2eproto_deps[1] = {
 };
@@ -240,7 +237,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_hyd
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_hydroponic_5fdata_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_hydroponic_5fdata_2eproto = {
-  false, false, descriptor_table_protodef_hydroponic_5fdata_2eproto, "hydroponic_data.proto", 841,
+  false, false, descriptor_table_protodef_hydroponic_5fdata_2eproto, "hydroponic_data.proto", 795,
   &descriptor_table_hydroponic_5fdata_2eproto_once, descriptor_table_hydroponic_5fdata_2eproto_sccs, descriptor_table_hydroponic_5fdata_2eproto_deps, 6, 0,
   schemas, file_default_instances, TableStruct_hydroponic_5fdata_2eproto::offsets,
   file_level_metadata_hydroponic_5fdata_2eproto, 6, file_level_enum_descriptors_hydroponic_5fdata_2eproto, file_level_service_descriptors_hydroponic_5fdata_2eproto,
@@ -797,9 +794,9 @@ DataPackage::DataPackage(const DataPackage& from)
     sector_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_sector(), 
       GetArena());
   }
-  ::memcpy(&messagetype_, &from.messagetype_,
+  ::memcpy(&deviceid_, &from.deviceid_,
     static_cast<size_t>(reinterpret_cast<char*>(&ledstatus_) -
-    reinterpret_cast<char*>(&messagetype_)) + sizeof(ledstatus_));
+    reinterpret_cast<char*>(&deviceid_)) + sizeof(ledstatus_));
   // @@protoc_insertion_point(copy_constructor:hydroponic.DataPackage)
 }
 
@@ -807,9 +804,9 @@ void DataPackage::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_DataPackage_hydroponic_5fdata_2eproto.base);
   sector_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-      reinterpret_cast<char*>(&messagetype_) - reinterpret_cast<char*>(this)),
+      reinterpret_cast<char*>(&deviceid_) - reinterpret_cast<char*>(this)),
       0, static_cast<size_t>(reinterpret_cast<char*>(&ledstatus_) -
-      reinterpret_cast<char*>(&messagetype_)) + sizeof(ledstatus_));
+      reinterpret_cast<char*>(&deviceid_)) + sizeof(ledstatus_));
 }
 
 DataPackage::~DataPackage() {
@@ -845,9 +842,9 @@ void DataPackage::Clear() {
   (void) cached_has_bits;
 
   sector_.ClearToEmpty();
-  ::memset(&messagetype_, 0, static_cast<size_t>(
+  ::memset(&deviceid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&ledstatus_) -
-      reinterpret_cast<char*>(&messagetype_)) + sizeof(ledstatus_));
+      reinterpret_cast<char*>(&deviceid_)) + sizeof(ledstatus_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -858,14 +855,6 @@ const char* DataPackage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .hydroponic.MessageType messageType = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-          _internal_set_messagetype(static_cast<::hydroponic::MessageType>(val));
-        } else goto handle_unusual;
-        continue;
       // uint32 deviceID = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
@@ -966,13 +955,6 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .hydroponic.MessageType messageType = 1;
-  if (this->messagetype() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_messagetype(), target);
-  }
-
   // uint32 deviceID = 2;
   if (this->deviceid() != 0) {
     target = stream->EnsureSpace(target);
@@ -1060,12 +1042,6 @@ size_t DataPackage::ByteSizeLong() const {
         this->_internal_sector());
   }
 
-  // .hydroponic.MessageType messageType = 1;
-  if (this->messagetype() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_messagetype());
-  }
-
   // uint32 deviceID = 2;
   if (this->deviceid() != 0) {
     total_size += 1 +
@@ -1149,9 +1125,6 @@ void DataPackage::MergeFrom(const DataPackage& from) {
   if (from.sector().size() > 0) {
     _internal_set_sector(from._internal_sector());
   }
-  if (from.messagetype() != 0) {
-    _internal_set_messagetype(from._internal_messagetype());
-  }
   if (from.deviceid() != 0) {
     _internal_set_deviceid(from._internal_deviceid());
   }
@@ -1206,9 +1179,9 @@ void DataPackage::InternalSwap(DataPackage* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(DataPackage, ledstatus_)
       + sizeof(DataPackage::ledstatus_)
-      - PROTOBUF_FIELD_OFFSET(DataPackage, messagetype_)>(
-          reinterpret_cast<char*>(&messagetype_),
-          reinterpret_cast<char*>(&other->messagetype_));
+      - PROTOBUF_FIELD_OFFSET(DataPackage, deviceid_)>(
+          reinterpret_cast<char*>(&deviceid_),
+          reinterpret_cast<char*>(&other->deviceid_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata DataPackage::GetMetadata() const {

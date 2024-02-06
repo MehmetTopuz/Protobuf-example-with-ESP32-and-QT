@@ -23,7 +23,6 @@ message Hydroponic {
 }
 
 message DataPackage {
-    MessageType messageType = 1;
     uint32 deviceID = 2;
     string sector = 3;
     float eConductivity = 4;

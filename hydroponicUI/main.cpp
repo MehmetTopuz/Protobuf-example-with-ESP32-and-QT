@@ -1,7 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "hydroponic_data.pb.h"
-#include "UdpHandler/udphandler.h"
+#include "protobufmanager.h"
 #include <QThread>
 
 
@@ -36,11 +35,13 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    UdpHandler udpServer("127.0.0.1", 5000);
+//    UdpHandler udpServer("127.0.0.1", 5000);
 
-    QByteArray message("Test message");
+//    QByteArray message("Test message");
 
-    udpServer.sendBytes(message, "127.0.0.1", 5000);
+//    udpServer.sendBytes(message, "127.0.0.1", 5000);
+
+    ProtobufManager manager;
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

@@ -6,12 +6,15 @@ QT += network
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        ProtobufManager/protobufmanager.cpp \
         UdpHandler/udphandler.cpp \
-        main.cpp
+        main.cpp \
+        protobuf/hydroponic_data.pb.cc
 
 RESOURCES += qml.qrc
 
 QMAKE_CXXFLAGS_DEBUG += /MTd
+CONFIG += c++17
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -31,7 +34,11 @@ else:unix: LIBS += -L$$PWD/protobuf/ -llibprotobuf
 
 INCLUDEPATH += $$PWD/protobuf
 INCLUDEPATH += $$PWD/protobuf/include
+INCLUDEPATH += $$PWD/UdpHandler
+INCLUDEPATH += $$PWD/ProtobufManager
 DEPENDPATH += $$PWD/protobuf
 
 HEADERS += \
-    UdpHandler/udphandler.h
+    ProtobufManager/protobufmanager.h \
+    UdpHandler/udphandler.h \
+    protobuf/hydroponic_data.pb.h
