@@ -17,6 +17,56 @@ ProtobufManager::~ProtobufManager()
 
 }
 
+ProtobufManager::HMessageType ProtobufManager::getMessageType()
+{
+    return this->messageType;
+}
+
+uint32_t ProtobufManager::getDeviceId()
+{
+    return this->dataMessage.deviceid();
+}
+
+QString ProtobufManager::getSectorName()
+{
+    return this->dataMessage.sector().c_str();
+}
+
+float ProtobufManager::getECval()
+{
+    return this->dataMessage.econductivity();
+}
+
+float ProtobufManager::getMoisture()
+{
+    return this->dataMessage.moisture();
+}
+
+float ProtobufManager::getTemperature()
+{
+    return this->dataMessage.temperature();
+}
+
+uint32_t ProtobufManager::getWaterLevel()
+{
+    return this->dataMessage.waterlevel();
+}
+
+bool ProtobufManager::getValveState()
+{
+    return this->dataMessage.valvestate();
+}
+
+bool ProtobufManager::getPumpState()
+{
+    return this->dataMessage.pumpstate();
+}
+
+bool ProtobufManager::getLedState()
+{
+    return this->dataMessage.ledstatus();
+}
+
 void ProtobufManager::packageReceived()
 {
     QByteArray packet;
@@ -26,6 +76,8 @@ void ProtobufManager::packageReceived()
     qInfo() << "Package received.";
 
     //todo: parse protobuf
+
+    this->parseProtobuf(packet);
 
 }
 
@@ -46,12 +98,16 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->dataMessage = this->hydroponicMessage.datapackage();
 
+        this->messageType = HMessageType::DATA;
+
         break;
     case MessageType::MSG_HEART_BEAT:
 
         qInfo() << "heart-beat packet received";
 
         this->heartBeatMessage = this->hydroponicMessage.heartbeat();
+
+        this->messageType = HMessageType::HEART_BEAT;
 
         break;
     case MessageType::MSG_OK:
@@ -60,12 +116,16 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->messageOk = this->hydroponicMessage.messageok();
 
+        this->messageType = HMessageType::MESSAGE_OK;
+
         break;
     case MessageType::MSG_ERROR:
 
         qInfo() << "error packet received";
 
         this->messageError = this->hydroponicMessage.messageerror();
+
+        this->messageType = HMessageType::MESSAGE_ERROR;
 
         break;
 
@@ -74,6 +134,8 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
         qInfo() << "timeout packet received";
 
         this->messageTimeout = this->hydroponicMessage.messagetimeout();
+
+        this->messageType = HMessageType::MESSAGE_TIMEOUT;
 
         break;
 

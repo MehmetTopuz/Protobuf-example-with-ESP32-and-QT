@@ -1,31 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "protobufmanager.h"
-#include <QThread>
-
-
-void udpTask(){
-
-    qInfo() << "Thread running";
-
-    UdpHandler udpServer("127.0.0.1", 5000);
-
-    QByteArray message("Test message");
-
-    udpServer.sendBytes(message, "127.0.0.1", 5000);
-
-    QByteArray receivedMessage;
-
-    while(true){
-        if(udpServer.isDataAvailable()){
-            udpServer.readBytes(&receivedMessage);
-            qInfo() << "Message received:" << receivedMessage;
-        }
-
-    }
-
-
-}
 
 int main(int argc, char *argv[])
 {
@@ -35,13 +10,7 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-//    UdpHandler udpServer("127.0.0.1", 5000);
-
-//    QByteArray message("Test message");
-
-//    udpServer.sendBytes(message, "127.0.0.1", 5000);
-
-    ProtobufManager manager;
+    qmlRegisterType<ProtobufManager>("com.protobuf", 1, 0, "ProtobufManager");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

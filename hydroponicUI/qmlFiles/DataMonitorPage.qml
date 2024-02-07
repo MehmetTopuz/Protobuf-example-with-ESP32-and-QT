@@ -4,11 +4,27 @@ import QtQuick.Layouts 1.3
 import QtQuick.VirtualKeyboard 2.15
 import QtGraphicalEffects 1.15
 
+import com.protobuf 1.0
+
 Item {
 
     id: dataMonitorItem
     width: parent.width
     height: parent.height
+
+    ProtobufManager{
+        id: protobufManager
+        onMessageReceived: {    // It will be triggered when a message is received.
+            // check message type
+
+//            switch(protobufManager.getMessageType()){
+//                case
+//            }
+
+            // do stuff
+        }
+
+    }
 
     Rectangle{
         id: dataMonitorMainFrame
@@ -144,27 +160,27 @@ Item {
 
         }
 
-        Timer{
-            interval: 50
-            running: true
-            repeat: true
-            onTriggered: {
-                if(waterLevel.level != 100){
-                    humidity.humidityVal++
-                    waterLevel.level++
-                }
-                else{
-                    humidity.humidityVal=0
-                    waterLevel.level=0
-                    waterPumpOfTank.pumpState=false
-                }
+//        Timer{
+//            interval: 50
+//            running: true
+//            repeat: true
+//            onTriggered: {
+//                if(waterLevel.level != 100){
+//                    humidity.humidityVal++
+//                    waterLevel.level++
+//                }
+//                else{
+//                    humidity.humidityVal=0
+//                    waterLevel.level=0
+//                    waterPumpOfTank.pumpState=false
+//                }
 
-                if(temperature.temperatureVal != 30)
-                    temperature.temperatureVal++
-                else
-                    temperature.temperatureVal=0
+//                if(temperature.temperatureVal != 30)
+//                    temperature.temperatureVal++
+//                else
+//                    temperature.temperatureVal=0
 
-            }
-        }
+//            }
+//        }
     }
 }
