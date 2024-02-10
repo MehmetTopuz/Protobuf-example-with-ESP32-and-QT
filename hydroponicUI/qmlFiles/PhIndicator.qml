@@ -32,7 +32,7 @@ Item {
 
         Text {
             id: phValText
-            text: phVal
+            text: phVal.toFixed(1)
             font.pointSize: 15
             font.bold: true
             anchors.left: phImage.right

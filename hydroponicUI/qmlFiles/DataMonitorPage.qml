@@ -18,10 +18,21 @@ Item {
             // check message type
 
 //            switch(protobufManager.getMessageType()){
-//                case
+//            case
 //            }
 
+            waterLevel.level = protobufManager.getWaterLevel()
+            temperature.temperatureVal = protobufManager.getTemperature()
+            ph.phVal = protobufManager.getPh()
+            humidity.humidityVal = protobufManager.getMoisture()
+            eConductivity.eConductivityVal = protobufManager.getECval()
+            waterPumpOfTank.pumpState = protobufManager.getPumpState()
+            valveOfTank.valveState = protobufManager.getValveState()
+            ledButton.buttonState = protobufManager.getLedState()
+
             // do stuff
+
+            console.log("Message received.")
         }
 
     }

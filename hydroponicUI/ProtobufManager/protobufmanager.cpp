@@ -4,7 +4,7 @@
 ProtobufManager::ProtobufManager(QObject *parent) : QObject{parent}
 {
 
-    this->udpHandler = new UdpHandler("127.0.0.1", 5000);
+    this->udpHandler = new UdpHandler("192.168.1.33", 5000);
 
     connect(this->udpHandler, &UdpHandler::dataReceived, this, &ProtobufManager::packageReceived);
 
@@ -37,6 +37,11 @@ float ProtobufManager::getECval()
     return this->dataMessage.econductivity();
 }
 
+float ProtobufManager::getPh()
+{
+    return this->dataMessage.ph();
+}
+
 float ProtobufManager::getMoisture()
 {
     return this->dataMessage.moisture();
@@ -47,7 +52,7 @@ float ProtobufManager::getTemperature()
     return this->dataMessage.temperature();
 }
 
-uint32_t ProtobufManager::getWaterLevel()
+int ProtobufManager::getWaterLevel()
 {
     return this->dataMessage.waterlevel();
 }
@@ -145,6 +150,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
         break;
     }
 
+    emit messageReceived();
     return true;
 
 }

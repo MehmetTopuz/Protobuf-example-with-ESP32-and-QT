@@ -26,9 +26,10 @@ public:
     Q_INVOKABLE uint32_t getDeviceId();
     Q_INVOKABLE QString getSectorName();
     Q_INVOKABLE float getECval();
+    Q_INVOKABLE float getPh();
     Q_INVOKABLE float getMoisture(); // change return type later
     Q_INVOKABLE float getTemperature();
-    Q_INVOKABLE uint32_t getWaterLevel();
+    Q_INVOKABLE int getWaterLevel();
     Q_INVOKABLE bool getValveState();
     Q_INVOKABLE bool getPumpState();
     Q_INVOKABLE bool getLedState();
