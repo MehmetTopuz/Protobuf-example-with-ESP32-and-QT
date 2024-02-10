@@ -56,7 +56,7 @@ void udpClientTask(void *param){
     int addr_family = 0;
     int ip_protocol = 0;
     uint8_t buffer[128] = {0};
-    hydroponicData_hDataPacket messageToSend = hydroponicData_hDataPacket_init_zero;
+    hydroponic_Hydroponic messageToSend = hydroponic_Hydroponic_init_default;
 
     while (1) {
         struct sockaddr_in dest_addr;
@@ -134,56 +134,174 @@ bool read_string(pb_istream_t *stream, const pb_field_t *field, void **arg)
     return true;
 }
 
+bool msg_callback(pb_istream_t *stream, const pb_field_t *field, void **arg)
+{
 
-int serializeData(uint8_t *buffer, size_t len, hydroponicData_hDataPacket *message){
+    // hydroponic_Hydroponic *topmsg = field->message;
+    // ESP_LOGI(TAG,"Message Type: %d" , (int)topmsg->messageType);
+
+    if (field->tag == hydroponic_Hydroponic_dataPackage_tag)
+    {
+
+
+        hydroponic_DataPackage *message = field->pData;
+
+        message->sector.funcs.decode =& read_string;
+        message->sector.arg = malloc(10*sizeof(char));
+
+    }
+
+    else if (field->tag == hydroponic_Hydroponic_messageOk_tag)
+    {
+        hydroponic_MessageOk *message = field->pData;
+
+        message->responseMessage.funcs.decode =& read_string;
+        message->responseMessage.arg = malloc(50*sizeof(char));
+       
+    }
+
+    else if (field->tag == hydroponic_Hydroponic_messageError_tag)
+    {
+
+        hydroponic_MessageError *message = field->pData;
+
+        message->errorType.funcs.decode =& read_string;
+        message->errorType.arg = malloc(50*sizeof(char));
+
+    }
+
+    else if (field->tag == hydroponic_Hydroponic_messageTimeout_tag)
+    {
+        hydroponic_MessageTimeout *message = field->pData;
+
+        message->timeoutMessage.funcs.decode =& read_string;
+        message->timeoutMessage.arg = malloc(50*sizeof(char));
+      
+    }
+
+    return true;
+}
+
+int serializeData(uint8_t *buffer, size_t len, hydroponic_Hydroponic *message){
 
     pb_ostream_t ostream = pb_ostream_from_buffer(buffer, len);
 
-    pb_encode(&ostream, hydroponicData_hDataPacket_fields, message);
+    pb_encode(&ostream, hydroponic_Hydroponic_fields, message);
 
     return ostream.bytes_written;
     
 }
 
-int deSerializeData(uint8_t *buffer, size_t len){
+ int deSerializeData(uint8_t *buffer, size_t len){
 
-    hydroponicData_hDataPacket receivedMessage = hydroponicData_hDataPacket_init_zero;
+    hydroponic_Hydroponic receivedMessage = hydroponic_Hydroponic_init_zero;
     pb_istream_t istream = pb_istream_from_buffer(buffer, len);
-    receivedMessage.sector.funcs.decode =& read_string;
-    receivedMessage.sector.arg = malloc(10*sizeof(char));
-    bool ret = pb_decode(&istream, hydroponicData_hDataPacket_fields, &receivedMessage); 
+    // receivedMessage.sector.funcs.decode =& read_string;
+    // receivedMessage.sector.arg = malloc(10*sizeof(char));
 
-    if(!ret)
+    receivedMessage.cb_msg.funcs.decode = msg_callback;
+
+    bool ret = pb_decode(&istream, hydroponic_Hydroponic_fields, &receivedMessage); 
+
+    if(!ret){
         ESP_LOGI(TAG, "Decode Error.");
-    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.messageType);
-    ESP_LOGI(TAG, "Decoded message: %ld", receivedMessage.deviceID);
-    ESP_LOGI(TAG, "Decoded message: %s", (char*)receivedMessage.sector.arg); 
-    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.eConductivity); 
-    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.ph); 
-    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.moisture); 
-    ESP_LOGI(TAG, "Decoded message: %f", receivedMessage.temperature); 
-    ESP_LOGI(TAG, "Decoded message: %ld", receivedMessage.waterLevel); 
-    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.valveState); 
-    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.pumpState); 
-    ESP_LOGI(TAG, "Decoded message: %d", receivedMessage.ledStatus); 
+        return 0;
+
+    }
+
+    if(receivedMessage.which_msg == hydroponic_Hydroponic_dataPackage_tag){
+
+        ESP_LOGI(TAG, "Data Package Received.");
+
+        ESP_LOGI(TAG, "Device ID: %ld", receivedMessage.msg.dataPackage.deviceID);
+        ESP_LOGI(TAG, "Sector: %s", (char*)receivedMessage.msg.dataPackage.sector.arg); 
+        ESP_LOGI(TAG, "E conductivity: %f", receivedMessage.msg.dataPackage.eConductivity); 
+        ESP_LOGI(TAG, "Ph: %f", receivedMessage.msg.dataPackage.ph); 
+        ESP_LOGI(TAG, "Moisture: %f", receivedMessage.msg.dataPackage.moisture); 
+        ESP_LOGI(TAG, "Temperature: %f", receivedMessage.msg.dataPackage.temperature); 
+        ESP_LOGI(TAG, "Water Level: %ld", receivedMessage.msg.dataPackage.waterLevel); 
+        ESP_LOGI(TAG, "Valve State: %d", receivedMessage.msg.dataPackage.valveState); 
+        ESP_LOGI(TAG, "Pump State: %d", receivedMessage.msg.dataPackage.pumpState); 
+        ESP_LOGI(TAG, "Led State: %d", receivedMessage.msg.dataPackage.ledStatus); 
+
+        //delete arg
+        free(receivedMessage.msg.dataPackage.sector.arg);
+
+    }
+    else if(receivedMessage.which_msg == hydroponic_Hydroponic_heartBeat_tag){
+        ESP_LOGI(TAG, "Heartbeat Package Received.");
+        ESP_LOGI(TAG, "Elapsed time %ld.", receivedMessage.msg.heartBeat.elapsedTime);
+
+    }
+    else if(receivedMessage.which_msg == hydroponic_Hydroponic_messageOk_tag){
+        ESP_LOGI(TAG, "Message OK Package Received.");
+        ESP_LOGI(TAG, "%s", (char*)receivedMessage.msg.messageOk.responseMessage.arg);
+
+        free(receivedMessage.msg.messageOk.responseMessage.arg);
+
+    }
+    else if(receivedMessage.which_msg == hydroponic_Hydroponic_messageError_tag){
+        ESP_LOGI(TAG, "Message Error Package Received.");
+        ESP_LOGI(TAG, "%s", (char*)receivedMessage.msg.messageError.errorType.arg);
+
+        free(receivedMessage.msg.messageError.errorType.arg);
+
+    }
+    else if(receivedMessage.which_msg == hydroponic_Hydroponic_messageTimeout_tag){
+        ESP_LOGI(TAG, "Message timeout Package Received.");
+        ESP_LOGI(TAG, "%s", (char*)receivedMessage.msg.messageTimeout.timeoutMessage.arg);
+
+        free(receivedMessage.msg.messageTimeout.timeoutMessage.arg);
+
+    }
+
     return 1;
 }
 
-void generateSampleHydroponicData(hydroponicData_hDataPacket *message){
+void generateSampleHydroponicData(hydroponic_Hydroponic *message){
 
-    message->messageType = hydroponicData_MessageType_MSG_DATA;
-    message->deviceID = 10;
-    message->sector.arg = "Sector-1";
-    message->sector.funcs.encode =& write_string;
+    message->messageType = hydroponic_MessageType_MSG_DATA;
+
+    message->which_msg = hydroponic_Hydroponic_dataPackage_tag;  // Deciding which message will be sent.
+
+    message->msg.dataPackage.deviceID = 10;
+    message->msg.dataPackage.sector.arg = "Sector-1";
+    message->msg.dataPackage.sector.funcs.encode =& write_string;
     
-    if(message->eConductivity >= 20.0f) message->eConductivity = 0.0f; else message->eConductivity += 1.0f;
-    if(message->ph >= 14.0f) message->ph = 0.0f; else message->ph += 0.1f;
-    if(message->moisture >= 50.0f) message->moisture = 10.0f; else message->moisture += 1.0f;
-    if(message->temperature >= 30.0f) message->temperature = 10.0f; else message->temperature += 1.0f;
-    if(message->waterLevel >= 100) message->waterLevel = 0; else message->waterLevel += 5;
-    if(message->waterLevel >= 100) message->valveState = false; else message->valveState = true;
+    if(message->msg.dataPackage.eConductivity >= 20.0f) message->msg.dataPackage.eConductivity = 0.0f; else message->msg.dataPackage.eConductivity += 1.0f;
+    if(message->msg.dataPackage.ph >= 14.0f) message->msg.dataPackage.ph = 0.0f; else message->msg.dataPackage.ph += 0.1f;
+    if(message->msg.dataPackage.moisture >= 50.0f) message->msg.dataPackage.moisture = 10.0f; else message->msg.dataPackage.moisture += 1.0f;
+    if(message->msg.dataPackage.temperature >= 30.0f) message->msg.dataPackage.temperature = 10.0f; else message->msg.dataPackage.temperature += 1.0f;
+    if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.waterLevel = 0; else message->msg.dataPackage.waterLevel += 5;
+    if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.valveState = false; else message->msg.dataPackage.valveState = true;
 
-    message->pumpState = false;
-    message->ledStatus = true;
+    message->msg.dataPackage.pumpState = false;
+    message->msg.dataPackage.ledStatus = true;
+
+// sample HeartBeat Message
+    // message->messageType = hydroponic_MessageType_MSG_HEART_BEAT;
+    // message->which_msg = hydroponic_Hydroponic_heartBeat_tag;
+    // message->msg.heartBeat.elapsedTime = 45;
+
+// sample Message Ok
+
+    // message->messageType = hydroponic_MessageType_MSG_OK;
+    // message->which_msg = hydroponic_Hydroponic_messageOk_tag;
+    // message->msg.messageOk.responseMessage.arg = "Message Accepted.";
+    // message->msg.messageOk.responseMessage.funcs.encode =& write_string;
+    
+// sample Message Error
+
+    // message->messageType = hydroponic_MessageType_MSG_ERROR;
+    // message->which_msg = hydroponic_Hydroponic_messageError_tag;
+    // message->msg.messageError.errorType.arg = "Error occured.";
+    // message->msg.messageError.errorType.funcs.encode =& write_string;
+
+// sample Message Timeout
+
+    // message->messageType = hydroponic_MessageType_MSG_TIMEOUT;
+    // message->which_msg = hydroponic_Hydroponic_messageTimeout_tag;
+    // message->msg.messageTimeout.timeoutMessage.arg = "Timeout occured.";
+    // message->msg.messageTimeout.timeoutMessage.funcs.encode =& write_string;
 
 }
