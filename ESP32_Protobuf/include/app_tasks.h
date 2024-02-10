@@ -12,7 +12,7 @@
 
 #define TASKS_TO_CREATE     ((size_t)(sizeof(TaskConfigArr) / sizeof(TaskConfigArr[0])))
 
-#define SERVER_IP           "192.168.38.188"
+#define SERVER_IP           "192.168.1.33"
 #define SERVER_PORT         5000
 
 

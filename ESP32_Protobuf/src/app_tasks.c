@@ -94,7 +94,7 @@ void udpClientTask(void *param){
             ESP_LOGI(TAG, "Message sent");
 
             // Decode the serialized data to verify that encoding is successful.
-            deSerializeData(buffer,size);
+            //deSerializeData(buffer,size);
             vTaskDelay(pdMS_TO_TICKS(1000));
 
 
@@ -273,10 +273,11 @@ void generateSampleHydroponicData(hydroponic_Hydroponic *message){
     if(message->msg.dataPackage.moisture >= 50.0f) message->msg.dataPackage.moisture = 10.0f; else message->msg.dataPackage.moisture += 1.0f;
     if(message->msg.dataPackage.temperature >= 30.0f) message->msg.dataPackage.temperature = 10.0f; else message->msg.dataPackage.temperature += 1.0f;
     if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.waterLevel = 0; else message->msg.dataPackage.waterLevel += 5;
-    if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.valveState = false; else message->msg.dataPackage.valveState = true;
+    //if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.valveState = false; else message->msg.dataPackage.valveState = true;
 
-    message->msg.dataPackage.pumpState = false;
-    message->msg.dataPackage.ledStatus = true;
+    message->msg.dataPackage.valveState = !message->msg.dataPackage.valveState;
+    message->msg.dataPackage.pumpState = !message->msg.dataPackage.pumpState;
+    message->msg.dataPackage.ledStatus = !message->msg.dataPackage.ledStatus;
 
 // sample HeartBeat Message
     // message->messageType = hydroponic_MessageType_MSG_HEART_BEAT;
