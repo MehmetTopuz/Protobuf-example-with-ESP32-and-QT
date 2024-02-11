@@ -6,6 +6,8 @@ Item {
     property bool buttonState: true
     property string buttonText: "None"
 
+    signal buttonClicked()
+
     Rectangle{
         id: buttonBackgroundRect
         width: parent.width
@@ -56,6 +58,7 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     buttonState  = !buttonState
+                    buttonClicked()
                 }
             }
         }

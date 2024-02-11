@@ -5,6 +5,8 @@ Item {
     property bool pumpState: false
     property string pumpText: "None"
 
+    signal pumpClicked()
+
     Rectangle{
         id: pumpBackgroundRect
         width: parent.width
@@ -66,7 +68,7 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     pumpState = !pumpState
-                    //send command
+                    pumpClicked()
                 }
 
             }

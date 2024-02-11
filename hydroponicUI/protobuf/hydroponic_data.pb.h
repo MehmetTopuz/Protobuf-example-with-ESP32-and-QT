@@ -47,7 +47,7 @@ struct TableStruct_hydroponic_5fdata_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[7]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -55,6 +55,9 @@ struct TableStruct_hydroponic_5fdata_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_hydroponic_5fdata_2eproto;
 namespace hydroponic {
+class Command;
+class CommandDefaultTypeInternal;
+extern CommandDefaultTypeInternal _Command_default_instance_;
 class DataPackage;
 class DataPackageDefaultTypeInternal;
 extern DataPackageDefaultTypeInternal _DataPackage_default_instance_;
@@ -75,6 +78,7 @@ class MessageTimeoutDefaultTypeInternal;
 extern MessageTimeoutDefaultTypeInternal _MessageTimeout_default_instance_;
 }  // namespace hydroponic
 PROTOBUF_NAMESPACE_OPEN
+template<> ::hydroponic::Command* Arena::CreateMaybeMessage<::hydroponic::Command>(Arena*);
 template<> ::hydroponic::DataPackage* Arena::CreateMaybeMessage<::hydroponic::DataPackage>(Arena*);
 template<> ::hydroponic::HeartBeat* Arena::CreateMaybeMessage<::hydroponic::HeartBeat>(Arena*);
 template<> ::hydroponic::Hydroponic* Arena::CreateMaybeMessage<::hydroponic::Hydroponic>(Arena*);
@@ -90,12 +94,13 @@ enum MessageType : int {
   MSG_ERROR = 2,
   MSG_DATA = 3,
   MSG_TIMEOUT = 4,
+  MSG_CMD = 5,
   MessageType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MessageType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MessageType_IsValid(int value);
 constexpr MessageType MessageType_MIN = MSG_HEART_BEAT;
-constexpr MessageType MessageType_MAX = MSG_TIMEOUT;
+constexpr MessageType MessageType_MAX = MSG_CMD;
 constexpr int MessageType_ARRAYSIZE = MessageType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MessageType_descriptor();
@@ -111,6 +116,35 @@ inline bool MessageType_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MessageType* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MessageType>(
     MessageType_descriptor(), name, value);
+}
+enum CMD : int {
+  CMD_VALVE_ON = 0,
+  CMD_VALVE_OFF = 1,
+  CMD_PUMP_ON = 2,
+  CMD_PUMP_OFF = 3,
+  CMD_LED_ON = 4,
+  CMD_LED_OFF = 5,
+  CMD_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  CMD_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool CMD_IsValid(int value);
+constexpr CMD CMD_MIN = CMD_VALVE_ON;
+constexpr CMD CMD_MAX = CMD_LED_OFF;
+constexpr int CMD_ARRAYSIZE = CMD_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CMD_descriptor();
+template<typename T>
+inline const std::string& CMD_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, CMD>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function CMD_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    CMD_descriptor(), enum_t_value);
+}
+inline bool CMD_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, CMD* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<CMD>(
+    CMD_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -156,6 +190,7 @@ class Hydroponic PROTOBUF_FINAL :
     kMessageOk = 4,
     kMessageError = 5,
     kMessageTimeout = 6,
+    kCmd = 7,
     MSG_NOT_SET = 0,
   };
 
@@ -241,6 +276,7 @@ class Hydroponic PROTOBUF_FINAL :
     kMessageOkFieldNumber = 4,
     kMessageErrorFieldNumber = 5,
     kMessageTimeoutFieldNumber = 6,
+    kCmdFieldNumber = 7,
   };
   // .hydroponic.MessageType messageType = 1;
   void clear_messagetype();
@@ -341,6 +377,24 @@ class Hydroponic PROTOBUF_FINAL :
       ::hydroponic::MessageTimeout* messagetimeout);
   ::hydroponic::MessageTimeout* unsafe_arena_release_messagetimeout();
 
+  // .hydroponic.Command cmd = 7;
+  bool has_cmd() const;
+  private:
+  bool _internal_has_cmd() const;
+  public:
+  void clear_cmd();
+  const ::hydroponic::Command& cmd() const;
+  ::hydroponic::Command* release_cmd();
+  ::hydroponic::Command* mutable_cmd();
+  void set_allocated_cmd(::hydroponic::Command* cmd);
+  private:
+  const ::hydroponic::Command& _internal_cmd() const;
+  ::hydroponic::Command* _internal_mutable_cmd();
+  public:
+  void unsafe_arena_set_allocated_cmd(
+      ::hydroponic::Command* cmd);
+  ::hydroponic::Command* unsafe_arena_release_cmd();
+
   void clear_msg();
   MsgCase msg_case() const;
   // @@protoc_insertion_point(class_scope:hydroponic.Hydroponic)
@@ -351,6 +405,7 @@ class Hydroponic PROTOBUF_FINAL :
   void set_has_messageok();
   void set_has_messageerror();
   void set_has_messagetimeout();
+  void set_has_cmd();
 
   inline bool has_msg() const;
   inline void clear_has_msg();
@@ -366,6 +421,7 @@ class Hydroponic PROTOBUF_FINAL :
     ::hydroponic::MessageOk* messageok_;
     ::hydroponic::MessageError* messageerror_;
     ::hydroponic::MessageTimeout* messagetimeout_;
+    ::hydroponic::Command* cmd_;
   } msg_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
@@ -1179,6 +1235,142 @@ class MessageTimeout PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_hydroponic_5fdata_2eproto;
 };
+// -------------------------------------------------------------------
+
+class Command PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:hydroponic.Command) */ {
+ public:
+  inline Command() : Command(nullptr) {}
+  virtual ~Command();
+
+  Command(const Command& from);
+  Command(Command&& from) noexcept
+    : Command() {
+    *this = ::std::move(from);
+  }
+
+  inline Command& operator=(const Command& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Command& operator=(Command&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const Command& default_instance();
+
+  static inline const Command* internal_default_instance() {
+    return reinterpret_cast<const Command*>(
+               &_Command_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(Command& a, Command& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Command* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Command* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Command* New() const final {
+    return CreateMaybeMessage<Command>(nullptr);
+  }
+
+  Command* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<Command>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const Command& from);
+  void MergeFrom(const Command& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Command* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "hydroponic.Command";
+  }
+  protected:
+  explicit Command(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_hydroponic_5fdata_2eproto);
+    return ::descriptor_table_hydroponic_5fdata_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCommandFieldNumber = 1,
+  };
+  // .hydroponic.CMD command = 1;
+  void clear_command();
+  ::hydroponic::CMD command() const;
+  void set_command(::hydroponic::CMD value);
+  private:
+  ::hydroponic::CMD _internal_command() const;
+  void _internal_set_command(::hydroponic::CMD value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:hydroponic.Command)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  int command_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_hydroponic_5fdata_2eproto;
+};
 // ===================================================================
 
 
@@ -1573,6 +1765,79 @@ inline ::hydroponic::MessageTimeout* Hydroponic::_internal_mutable_messagetimeou
 inline ::hydroponic::MessageTimeout* Hydroponic::mutable_messagetimeout() {
   // @@protoc_insertion_point(field_mutable:hydroponic.Hydroponic.messageTimeout)
   return _internal_mutable_messagetimeout();
+}
+
+// .hydroponic.Command cmd = 7;
+inline bool Hydroponic::_internal_has_cmd() const {
+  return msg_case() == kCmd;
+}
+inline bool Hydroponic::has_cmd() const {
+  return _internal_has_cmd();
+}
+inline void Hydroponic::set_has_cmd() {
+  _oneof_case_[0] = kCmd;
+}
+inline void Hydroponic::clear_cmd() {
+  if (_internal_has_cmd()) {
+    if (GetArena() == nullptr) {
+      delete msg_.cmd_;
+    }
+    clear_has_msg();
+  }
+}
+inline ::hydroponic::Command* Hydroponic::release_cmd() {
+  // @@protoc_insertion_point(field_release:hydroponic.Hydroponic.cmd)
+  if (_internal_has_cmd()) {
+    clear_has_msg();
+      ::hydroponic::Command* temp = msg_.cmd_;
+    if (GetArena() != nullptr) {
+      temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+    }
+    msg_.cmd_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::hydroponic::Command& Hydroponic::_internal_cmd() const {
+  return _internal_has_cmd()
+      ? *msg_.cmd_
+      : reinterpret_cast< ::hydroponic::Command&>(::hydroponic::_Command_default_instance_);
+}
+inline const ::hydroponic::Command& Hydroponic::cmd() const {
+  // @@protoc_insertion_point(field_get:hydroponic.Hydroponic.cmd)
+  return _internal_cmd();
+}
+inline ::hydroponic::Command* Hydroponic::unsafe_arena_release_cmd() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:hydroponic.Hydroponic.cmd)
+  if (_internal_has_cmd()) {
+    clear_has_msg();
+    ::hydroponic::Command* temp = msg_.cmd_;
+    msg_.cmd_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void Hydroponic::unsafe_arena_set_allocated_cmd(::hydroponic::Command* cmd) {
+  clear_msg();
+  if (cmd) {
+    set_has_cmd();
+    msg_.cmd_ = cmd;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:hydroponic.Hydroponic.cmd)
+}
+inline ::hydroponic::Command* Hydroponic::_internal_mutable_cmd() {
+  if (!_internal_has_cmd()) {
+    clear_msg();
+    set_has_cmd();
+    msg_.cmd_ = CreateMaybeMessage< ::hydroponic::Command >(GetArena());
+  }
+  return msg_.cmd_;
+}
+inline ::hydroponic::Command* Hydroponic::mutable_cmd() {
+  // @@protoc_insertion_point(field_mutable:hydroponic.Hydroponic.cmd)
+  return _internal_mutable_cmd();
 }
 
 inline bool Hydroponic::has_msg() const {
@@ -2048,9 +2313,35 @@ inline void MessageTimeout::set_allocated_timeoutmessage(std::string* timeoutmes
   // @@protoc_insertion_point(field_set_allocated:hydroponic.MessageTimeout.timeoutMessage)
 }
 
+// -------------------------------------------------------------------
+
+// Command
+
+// .hydroponic.CMD command = 1;
+inline void Command::clear_command() {
+  command_ = 0;
+}
+inline ::hydroponic::CMD Command::_internal_command() const {
+  return static_cast< ::hydroponic::CMD >(command_);
+}
+inline ::hydroponic::CMD Command::command() const {
+  // @@protoc_insertion_point(field_get:hydroponic.Command.command)
+  return _internal_command();
+}
+inline void Command::_internal_set_command(::hydroponic::CMD value) {
+  
+  command_ = value;
+}
+inline void Command::set_command(::hydroponic::CMD value) {
+  _internal_set_command(value);
+  // @@protoc_insertion_point(field_set:hydroponic.Command.command)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -2072,6 +2363,11 @@ template <> struct is_proto_enum< ::hydroponic::MessageType> : ::std::true_type 
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::hydroponic::MessageType>() {
   return ::hydroponic::MessageType_descriptor();
+}
+template <> struct is_proto_enum< ::hydroponic::CMD> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::hydroponic::CMD>() {
+  return ::hydroponic::CMD_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

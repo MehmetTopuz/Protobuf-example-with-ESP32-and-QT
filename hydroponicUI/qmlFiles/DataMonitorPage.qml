@@ -142,6 +142,14 @@ Item {
 
             pumpState: true
             pumpText: "Tank Water Pump"
+
+            onPumpClicked: {
+                if(pumpState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_PUMP_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_PUMP_OFF)
+            }
+
         }
 
         ValveIndicator{
@@ -154,6 +162,13 @@ Item {
 
             valveState: false
             valveLabel: "Valve State"
+
+            onValveClicked: {
+                if(valveOfTank.valveState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_VALVE_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_VALVE_OFF)
+            }
 
         }
 
@@ -168,6 +183,13 @@ Item {
 
             buttonText: "Led"
             buttonState: false
+
+            onButtonClicked: {
+                if(ledButton.buttonState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_LED_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_LED_OFF)
+            }
 
         }
 
