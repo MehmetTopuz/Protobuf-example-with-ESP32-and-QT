@@ -12,7 +12,7 @@
 
 #define TASKS_TO_CREATE     ((size_t)(sizeof(TaskConfigArr) / sizeof(TaskConfigArr[0])))
 
-#define SERVER_IP           "192.168.38.188"
+#define SERVER_IP           "192.168.1.33"
 #define SERVER_PORT         5000
 
 
@@ -26,9 +26,11 @@ typedef struct {
 }TaskConfig_t;
 
 void initalizeTasks(void);
-void udpClientTask(void *param);
-int serializeData(uint8_t *buffer, size_t len, hydroponicData_hDataPacket *message);
-int deSerializeData(uint8_t *buffer, size_t len);
-void generateSampleHydroponicData(hydroponicData_hDataPacket *message);
+void udpSenderTask(void *param);
+void udpReceiverTask(void *param);
+void commandProcessTask(void *param);
+int serializeData(uint8_t *buffer, size_t len, hydroponic_Hydroponic *message);
+int deSerializeData(uint8_t *buffer, size_t len, hydroponic_Hydroponic *message);
+void generateSampleHydroponicData(hydroponic_Hydroponic *message);
 
 #endif
