@@ -27,6 +27,10 @@ void app_main(void)
 
     ESP_ERROR_CHECK(example_connect());
 
-    initalizeTasks();
+    initalizeTasks();   
+
+    while(1){ 
+
+    }
     
 }

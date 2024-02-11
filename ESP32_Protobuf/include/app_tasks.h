@@ -26,9 +26,11 @@ typedef struct {
 }TaskConfig_t;
 
 void initalizeTasks(void);
-void udpClientTask(void *param);
+void udpSenderTask(void *param);
+void udpReceiverTask(void *param);
+void commandProcessTask(void *param);
 int serializeData(uint8_t *buffer, size_t len, hydroponic_Hydroponic *message);
-int deSerializeData(uint8_t *buffer, size_t len);
+int deSerializeData(uint8_t *buffer, size_t len, hydroponic_Hydroponic *message);
 void generateSampleHydroponicData(hydroponic_Hydroponic *message);
 
 #endif
