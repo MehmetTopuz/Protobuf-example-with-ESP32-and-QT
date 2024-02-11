@@ -5,6 +5,8 @@ Item {
     property bool pumpState: false
     property string pumpText: "None"
 
+    signal pumpClicked()
+
     Rectangle{
         id: pumpBackgroundRect
         width: parent.width
@@ -18,7 +20,8 @@ Item {
             anchors.bottom: pumpImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: pumpImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -66,10 +69,24 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     pumpState = !pumpState
-                    //send command
+                    pumpClicked()
                 }
 
             }
+        }
+        Text {
+            id: stateText
+            text: {
+                if(pumpState)
+                    qsTr("ON")
+                else
+                    qsTr("OFF")
+            }
+            font.bold: true
+            font.pointSize: 12
+            anchors.top: pumpImage.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: pumpImage.horizontalCenter
         }
 
     }

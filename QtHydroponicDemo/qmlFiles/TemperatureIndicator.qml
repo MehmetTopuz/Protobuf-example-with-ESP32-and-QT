@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     id: temperatureItem
 
-    property int temperatureVal: 0
+    property double temperatureVal: 0
     property string temperatureLabel: "None"
     Rectangle{
         id: temperatureBackgroundRect
@@ -18,7 +18,8 @@ Item {
             anchors.bottom: temperatureImage.top
             anchors.bottomMargin: 5
             anchors.horizontalCenter: temperatureImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -51,7 +52,7 @@ Item {
 
         Text {
             id: temperatureText
-            text: qsTr(temperatureVal+" C°")
+            text: qsTr(temperatureVal.toFixed(1)+" C°")
             font.pointSize: 15
             font.bold: true
             anchors.left: temperatureImage.right

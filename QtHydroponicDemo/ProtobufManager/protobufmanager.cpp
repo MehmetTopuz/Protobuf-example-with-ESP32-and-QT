@@ -4,7 +4,7 @@
 ProtobufManager::ProtobufManager(QObject *parent) : QObject{parent}
 {
 
-    this->udpHandler = new UdpHandler("127.0.0.1", 5000);
+    this->udpHandler = new UdpHandler("192.168.1.33", 5000);
 
     connect(this->udpHandler, &UdpHandler::dataReceived, this, &ProtobufManager::packageReceived);
 
@@ -17,7 +17,7 @@ ProtobufManager::~ProtobufManager()
 
 }
 
-ProtobufManager::HMessageType ProtobufManager::getMessageType()
+ProtobufManager::HydroponicMessageType ProtobufManager::getMessageType()
 {
     return this->messageType;
 }
@@ -37,6 +37,11 @@ float ProtobufManager::getECval()
     return this->dataMessage.econductivity();
 }
 
+float ProtobufManager::getPh()
+{
+    return this->dataMessage.ph();
+}
+
 float ProtobufManager::getMoisture()
 {
     return this->dataMessage.moisture();
@@ -47,7 +52,7 @@ float ProtobufManager::getTemperature()
     return this->dataMessage.temperature();
 }
 
-uint32_t ProtobufManager::getWaterLevel()
+int ProtobufManager::getWaterLevel()
 {
     return this->dataMessage.waterlevel();
 }
@@ -67,6 +72,32 @@ bool ProtobufManager::getLedState()
     return this->dataMessage.ledstatus();
 }
 
+void ProtobufManager::sendCommand(HydroponicCMD command)
+{
+    // create top level message and command message
+    hydroponic::Hydroponic hydroponicMessage;
+    hydroponic::Command cmdMessage;
+
+    cmdMessage.set_command(this->cmdLookUpTable[command]);
+    // set top level message to command message
+
+    hydroponicMessage.set_allocated_cmd(&cmdMessage);
+
+    // serialize to array
+    QByteArray arr;
+    arr.resize(hydroponicMessage.ByteSizeLong());
+
+    //serializeToArray(&arr, hydroponicMessage);
+    hydroponicMessage.SerializeToArray(arr.data(), arr.size());
+    // send to ESP32
+
+    //this->udpHandler->sendBytes(arr, "192.168.1.35", 5000);
+    this->udpHandler->sendBytes(arr, this->udpHandler->getSenderAddress(), this->udpHandler->getSenderPort());
+
+    // release
+    hydroponicMessage.release_cmd();
+}
+
 void ProtobufManager::packageReceived()
 {
     QByteArray packet;
@@ -74,8 +105,6 @@ void ProtobufManager::packageReceived()
     this->udpHandler->readBytes(&packet);
 
     qInfo() << "Package received.";
-
-    //todo: parse protobuf
 
     this->parseProtobuf(packet);
 
@@ -98,7 +127,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->dataMessage = this->hydroponicMessage.datapackage();
 
-        this->messageType = HMessageType::DATA;
+        this->messageType = HydroponicMessageType::DATA;
 
         break;
     case MessageType::MSG_HEART_BEAT:
@@ -107,7 +136,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->heartBeatMessage = this->hydroponicMessage.heartbeat();
 
-        this->messageType = HMessageType::HEART_BEAT;
+        this->messageType = HydroponicMessageType::HEART_BEAT;
 
         break;
     case MessageType::MSG_OK:
@@ -116,7 +145,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->messageOk = this->hydroponicMessage.messageok();
 
-        this->messageType = HMessageType::MESSAGE_OK;
+        this->messageType = HydroponicMessageType::MESSAGE_OK;
 
         break;
     case MessageType::MSG_ERROR:
@@ -125,7 +154,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->messageError = this->hydroponicMessage.messageerror();
 
-        this->messageType = HMessageType::MESSAGE_ERROR;
+        this->messageType = HydroponicMessageType::MESSAGE_ERROR;
 
         break;
 
@@ -135,7 +164,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
 
         this->messageTimeout = this->hydroponicMessage.messagetimeout();
 
-        this->messageType = HMessageType::MESSAGE_TIMEOUT;
+        this->messageType = HydroponicMessageType::MESSAGE_TIMEOUT;
 
         break;
 
@@ -145,11 +174,7 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
         break;
     }
 
+    emit messageReceived();
     return true;
 
-}
-
-bool ProtobufManager::serializeToArray(QByteArray *buffer, MessageType messageType)
-{
-    return false;
 }

@@ -14,6 +14,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_hydroponic_5fdata_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Command_hydroponic_5fdata_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_hydroponic_5fdata_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DataPackage_hydroponic_5fdata_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_hydroponic_5fdata_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_HeartBeat_hydroponic_5fdata_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_hydroponic_5fdata_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MessageError_hydroponic_5fdata_2eproto;
@@ -44,7 +45,24 @@ class MessageTimeoutDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MessageTimeout> _instance;
 } _MessageTimeout_default_instance_;
+class CommandDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Command> _instance;
+} _Command_default_instance_;
 }  // namespace hydroponic
+static void InitDefaultsscc_info_Command_hydroponic_5fdata_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::hydroponic::_Command_default_instance_;
+    new (ptr) ::hydroponic::Command();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Command_hydroponic_5fdata_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Command_hydroponic_5fdata_2eproto}, {}};
+
 static void InitDefaultsscc_info_DataPackage_hydroponic_5fdata_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -81,13 +99,14 @@ static void InitDefaultsscc_info_Hydroponic_hydroponic_5fdata_2eproto() {
   }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<5> scc_info_Hydroponic_hydroponic_5fdata_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 5, 0, InitDefaultsscc_info_Hydroponic_hydroponic_5fdata_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<6> scc_info_Hydroponic_hydroponic_5fdata_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 6, 0, InitDefaultsscc_info_Hydroponic_hydroponic_5fdata_2eproto}, {
       &scc_info_DataPackage_hydroponic_5fdata_2eproto.base,
       &scc_info_HeartBeat_hydroponic_5fdata_2eproto.base,
       &scc_info_MessageOk_hydroponic_5fdata_2eproto.base,
       &scc_info_MessageError_hydroponic_5fdata_2eproto.base,
-      &scc_info_MessageTimeout_hydroponic_5fdata_2eproto.base,}};
+      &scc_info_MessageTimeout_hydroponic_5fdata_2eproto.base,
+      &scc_info_Command_hydroponic_5fdata_2eproto.base,}};
 
 static void InitDefaultsscc_info_MessageError_hydroponic_5fdata_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -128,8 +147,8 @@ static void InitDefaultsscc_info_MessageTimeout_hydroponic_5fdata_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MessageTimeout_hydroponic_5fdata_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MessageTimeout_hydroponic_5fdata_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_hydroponic_5fdata_2eproto[6];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_hydroponic_5fdata_2eproto[1];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_hydroponic_5fdata_2eproto[7];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_hydroponic_5fdata_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_hydroponic_5fdata_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_hydroponic_5fdata_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -139,6 +158,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_hydroponic_5fdata_2eproto::off
   PROTOBUF_FIELD_OFFSET(::hydroponic::Hydroponic, _oneof_case_[0]),
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::hydroponic::Hydroponic, messagetype_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
@@ -184,14 +204,21 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_hydroponic_5fdata_2eproto::off
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::hydroponic::MessageTimeout, timeoutmessage_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::hydroponic::Command, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::hydroponic::Command, command_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::hydroponic::Hydroponic)},
-  { 12, -1, sizeof(::hydroponic::DataPackage)},
-  { 27, -1, sizeof(::hydroponic::HeartBeat)},
-  { 33, -1, sizeof(::hydroponic::MessageOk)},
-  { 39, -1, sizeof(::hydroponic::MessageError)},
-  { 45, -1, sizeof(::hydroponic::MessageTimeout)},
+  { 13, -1, sizeof(::hydroponic::DataPackage)},
+  { 28, -1, sizeof(::hydroponic::HeartBeat)},
+  { 34, -1, sizeof(::hydroponic::MessageOk)},
+  { 40, -1, sizeof(::hydroponic::MessageError)},
+  { 46, -1, sizeof(::hydroponic::MessageTimeout)},
+  { 52, -1, sizeof(::hydroponic::Command)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -201,10 +228,11 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hydroponic::_MessageOk_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hydroponic::_MessageError_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hydroponic::_MessageTimeout_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::hydroponic::_Command_default_instance_),
 };
 
 const char descriptor_table_protodef_hydroponic_5fdata_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\025hydroponic_data.proto\022\nhydroponic\"\261\002\n\n"
+  "\n\025hydroponic_data.proto\022\nhydroponic\"\325\002\n\n"
   "Hydroponic\022,\n\013messageType\030\001 \001(\0162\027.hydrop"
   "onic.MessageType\022.\n\013dataPackage\030\002 \001(\0132\027."
   "hydroponic.DataPackageH\000\022*\n\theartBeat\030\003 "
@@ -212,22 +240,29 @@ const char descriptor_table_protodef_hydroponic_5fdata_2eproto[] PROTOBUF_SECTIO
   "k\030\004 \001(\0132\025.hydroponic.MessageOkH\000\0220\n\014mess"
   "ageError\030\005 \001(\0132\030.hydroponic.MessageError"
   "H\000\0224\n\016messageTimeout\030\006 \001(\0132\032.hydroponic."
-  "MessageTimeoutH\000B\005\n\003msg\"\307\001\n\013DataPackage\022"
-  "\020\n\010deviceID\030\002 \001(\r\022\016\n\006sector\030\003 \001(\t\022\025\n\reCo"
-  "nductivity\030\004 \001(\002\022\n\n\002ph\030\005 \001(\002\022\020\n\010moisture"
-  "\030\006 \001(\002\022\023\n\013temperature\030\007 \001(\002\022\022\n\nwaterLeve"
-  "l\030\010 \001(\r\022\022\n\nvalveState\030\t \001(\010\022\021\n\tpumpState"
-  "\030\n \001(\010\022\021\n\tledStatus\030\013 \001(\010\" \n\tHeartBeat\022\023"
-  "\n\013elapsedTime\030\001 \001(\r\"$\n\tMessageOk\022\027\n\017resp"
-  "onseMessage\030\001 \001(\t\"!\n\014MessageError\022\021\n\terr"
-  "orType\030\001 \001(\t\"(\n\016MessageTimeout\022\026\n\016timeou"
-  "tMessage\030\001 \001(\t*[\n\013MessageType\022\022\n\016MSG_HEA"
-  "RT_BEAT\020\000\022\n\n\006MSG_OK\020\001\022\r\n\tMSG_ERROR\020\002\022\014\n\010"
-  "MSG_DATA\020\003\022\017\n\013MSG_TIMEOUT\020\004b\006proto3"
+  "MessageTimeoutH\000\022\"\n\003cmd\030\007 \001(\0132\023.hydropon"
+  "ic.CommandH\000B\005\n\003msg\"\307\001\n\013DataPackage\022\020\n\010d"
+  "eviceID\030\002 \001(\r\022\016\n\006sector\030\003 \001(\t\022\025\n\reConduc"
+  "tivity\030\004 \001(\002\022\n\n\002ph\030\005 \001(\002\022\020\n\010moisture\030\006 \001"
+  "(\002\022\023\n\013temperature\030\007 \001(\002\022\022\n\nwaterLevel\030\010 "
+  "\001(\r\022\022\n\nvalveState\030\t \001(\010\022\021\n\tpumpState\030\n \001"
+  "(\010\022\021\n\tledStatus\030\013 \001(\010\" \n\tHeartBeat\022\023\n\013el"
+  "apsedTime\030\001 \001(\r\"$\n\tMessageOk\022\027\n\017response"
+  "Message\030\001 \001(\t\"!\n\014MessageError\022\021\n\terrorTy"
+  "pe\030\001 \001(\t\"(\n\016MessageTimeout\022\026\n\016timeoutMes"
+  "sage\030\001 \001(\t\"+\n\007Command\022 \n\007command\030\001 \001(\0162\017"
+  ".hydroponic.CMD*h\n\013MessageType\022\022\n\016MSG_HE"
+  "ART_BEAT\020\000\022\n\n\006MSG_OK\020\001\022\r\n\tMSG_ERROR\020\002\022\014\n"
+  "\010MSG_DATA\020\003\022\017\n\013MSG_TIMEOUT\020\004\022\013\n\007MSG_CMD\020"
+  "\005*n\n\003CMD\022\020\n\014CMD_VALVE_ON\020\000\022\021\n\rCMD_VALVE_"
+  "OFF\020\001\022\017\n\013CMD_PUMP_ON\020\002\022\020\n\014CMD_PUMP_OFF\020\003"
+  "\022\016\n\nCMD_LED_ON\020\004\022\017\n\013CMD_LED_OFF\020\005b\006proto"
+  "3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_hydroponic_5fdata_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_hydroponic_5fdata_2eproto_sccs[6] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_hydroponic_5fdata_2eproto_sccs[7] = {
+  &scc_info_Command_hydroponic_5fdata_2eproto.base,
   &scc_info_DataPackage_hydroponic_5fdata_2eproto.base,
   &scc_info_HeartBeat_hydroponic_5fdata_2eproto.base,
   &scc_info_Hydroponic_hydroponic_5fdata_2eproto.base,
@@ -237,10 +272,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_hyd
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_hydroponic_5fdata_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_hydroponic_5fdata_2eproto = {
-  false, false, descriptor_table_protodef_hydroponic_5fdata_2eproto, "hydroponic_data.proto", 795,
-  &descriptor_table_hydroponic_5fdata_2eproto_once, descriptor_table_hydroponic_5fdata_2eproto_sccs, descriptor_table_hydroponic_5fdata_2eproto_deps, 6, 0,
+  false, false, descriptor_table_protodef_hydroponic_5fdata_2eproto, "hydroponic_data.proto", 1001,
+  &descriptor_table_hydroponic_5fdata_2eproto_once, descriptor_table_hydroponic_5fdata_2eproto_sccs, descriptor_table_hydroponic_5fdata_2eproto_deps, 7, 0,
   schemas, file_default_instances, TableStruct_hydroponic_5fdata_2eproto::offsets,
-  file_level_metadata_hydroponic_5fdata_2eproto, 6, file_level_enum_descriptors_hydroponic_5fdata_2eproto, file_level_service_descriptors_hydroponic_5fdata_2eproto,
+  file_level_metadata_hydroponic_5fdata_2eproto, 7, file_level_enum_descriptors_hydroponic_5fdata_2eproto, file_level_service_descriptors_hydroponic_5fdata_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -257,6 +292,25 @@ bool MessageType_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CMD_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_hydroponic_5fdata_2eproto);
+  return file_level_enum_descriptors_hydroponic_5fdata_2eproto[1];
+}
+bool CMD_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -273,6 +327,7 @@ class Hydroponic::_Internal {
   static const ::hydroponic::MessageOk& messageok(const Hydroponic* msg);
   static const ::hydroponic::MessageError& messageerror(const Hydroponic* msg);
   static const ::hydroponic::MessageTimeout& messagetimeout(const Hydroponic* msg);
+  static const ::hydroponic::Command& cmd(const Hydroponic* msg);
 };
 
 const ::hydroponic::DataPackage&
@@ -294,6 +349,10 @@ Hydroponic::_Internal::messageerror(const Hydroponic* msg) {
 const ::hydroponic::MessageTimeout&
 Hydroponic::_Internal::messagetimeout(const Hydroponic* msg) {
   return *msg->msg_.messagetimeout_;
+}
+const ::hydroponic::Command&
+Hydroponic::_Internal::cmd(const Hydroponic* msg) {
+  return *msg->msg_.cmd_;
 }
 void Hydroponic::set_allocated_datapackage(::hydroponic::DataPackage* datapackage) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
@@ -370,6 +429,21 @@ void Hydroponic::set_allocated_messagetimeout(::hydroponic::MessageTimeout* mess
   }
   // @@protoc_insertion_point(field_set_allocated:hydroponic.Hydroponic.messageTimeout)
 }
+void Hydroponic::set_allocated_cmd(::hydroponic::Command* cmd) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  clear_msg();
+  if (cmd) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(cmd);
+    if (message_arena != submessage_arena) {
+      cmd = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cmd, submessage_arena);
+    }
+    set_has_cmd();
+    msg_.cmd_ = cmd;
+  }
+  // @@protoc_insertion_point(field_set_allocated:hydroponic.Hydroponic.cmd)
+}
 Hydroponic::Hydroponic(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
@@ -400,6 +474,10 @@ Hydroponic::Hydroponic(const Hydroponic& from)
     }
     case kMessageTimeout: {
       _internal_mutable_messagetimeout()->::hydroponic::MessageTimeout::MergeFrom(from._internal_messagetimeout());
+      break;
+    }
+    case kCmd: {
+      _internal_mutable_cmd()->::hydroponic::Command::MergeFrom(from._internal_cmd());
       break;
     }
     case MSG_NOT_SET: {
@@ -476,6 +554,12 @@ void Hydroponic::clear_msg() {
       }
       break;
     }
+    case kCmd: {
+      if (GetArena() == nullptr) {
+        delete msg_.cmd_;
+      }
+      break;
+    }
     case MSG_NOT_SET: {
       break;
     }
@@ -542,6 +626,13 @@ const char* Hydroponic::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_messagetimeout(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .hydroponic.Command cmd = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_cmd(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -620,6 +711,14 @@ failure:
         6, _Internal::messagetimeout(this), target, stream);
   }
 
+  // .hydroponic.Command cmd = 7;
+  if (_internal_has_cmd()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::cmd(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -676,6 +775,13 @@ size_t Hydroponic::ByteSizeLong() const {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *msg_.messagetimeout_);
+      break;
+    }
+    // .hydroponic.Command cmd = 7;
+    case kCmd: {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *msg_.cmd_);
       break;
     }
     case MSG_NOT_SET: {
@@ -735,6 +841,10 @@ void Hydroponic::MergeFrom(const Hydroponic& from) {
     }
     case kMessageTimeout: {
       _internal_mutable_messagetimeout()->::hydroponic::MessageTimeout::MergeFrom(from._internal_messagetimeout());
+      break;
+    }
+    case kCmd: {
+      _internal_mutable_cmd()->::hydroponic::Command::MergeFrom(from._internal_cmd());
       break;
     }
     case MSG_NOT_SET: {
@@ -2001,6 +2111,201 @@ void MessageTimeout::InternalSwap(MessageTimeout* other) {
 }
 
 
+// ===================================================================
+
+class Command::_Internal {
+ public:
+};
+
+Command::Command(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:hydroponic.Command)
+}
+Command::Command(const Command& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  command_ = from.command_;
+  // @@protoc_insertion_point(copy_constructor:hydroponic.Command)
+}
+
+void Command::SharedCtor() {
+  command_ = 0;
+}
+
+Command::~Command() {
+  // @@protoc_insertion_point(destructor:hydroponic.Command)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void Command::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void Command::ArenaDtor(void* object) {
+  Command* _this = reinterpret_cast< Command* >(object);
+  (void)_this;
+}
+void Command::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Command::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const Command& Command::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Command_hydroponic_5fdata_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void Command::Clear() {
+// @@protoc_insertion_point(message_clear_start:hydroponic.Command)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  command_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Command::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .hydroponic.CMD command = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_command(static_cast<::hydroponic::CMD>(val));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* Command::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:hydroponic.Command)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .hydroponic.CMD command = 1;
+  if (this->command() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_command(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:hydroponic.Command)
+  return target;
+}
+
+size_t Command::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:hydroponic.Command)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .hydroponic.CMD command = 1;
+  if (this->command() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_command());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Command::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:hydroponic.Command)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Command* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Command>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:hydroponic.Command)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:hydroponic.Command)
+    MergeFrom(*source);
+  }
+}
+
+void Command::MergeFrom(const Command& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:hydroponic.Command)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.command() != 0) {
+    _internal_set_command(from._internal_command());
+  }
+}
+
+void Command::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:hydroponic.Command)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Command::CopyFrom(const Command& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:hydroponic.Command)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Command::IsInitialized() const {
+  return true;
+}
+
+void Command::InternalSwap(Command* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(command_, other->command_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Command::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace hydroponic
 PROTOBUF_NAMESPACE_OPEN
@@ -2021,6 +2326,9 @@ template<> PROTOBUF_NOINLINE ::hydroponic::MessageError* Arena::CreateMaybeMessa
 }
 template<> PROTOBUF_NOINLINE ::hydroponic::MessageTimeout* Arena::CreateMaybeMessage< ::hydroponic::MessageTimeout >(Arena* arena) {
   return Arena::CreateMessageInternal< ::hydroponic::MessageTimeout >(arena);
+}
+template<> PROTOBUF_NOINLINE ::hydroponic::Command* Arena::CreateMaybeMessage< ::hydroponic::Command >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::hydroponic::Command >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

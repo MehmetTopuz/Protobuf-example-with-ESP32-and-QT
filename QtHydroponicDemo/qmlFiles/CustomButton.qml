@@ -6,6 +6,8 @@ Item {
     property bool buttonState: true
     property string buttonText: "None"
 
+    signal buttonClicked()
+
     Rectangle{
         id: buttonBackgroundRect
         width: parent.width
@@ -19,7 +21,8 @@ Item {
             anchors.bottom: buttonImage.top
             anchors.bottomMargin: 10
             anchors.horizontalCenter: buttonImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -56,6 +59,7 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     buttonState  = !buttonState
+                    buttonClicked()
                 }
             }
         }

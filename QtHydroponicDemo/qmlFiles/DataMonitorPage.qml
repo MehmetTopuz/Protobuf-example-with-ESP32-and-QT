@@ -17,13 +17,44 @@ Item {
         onMessageReceived: {    // It will be triggered when a message is received.
             // check message type
 
-//            switch(protobufManager.getMessageType()){
-//                case
-//            }
+            switch(protobufManager.getMessageType()){
+            case ProtobufManager.DATA:
+                // get data
+                waterLevel.level = protobufManager.getWaterLevel()
+                temperature.temperatureVal = protobufManager.getTemperature()
+                ph.phVal = protobufManager.getPh()
+                humidity.humidityVal = protobufManager.getMoisture()
+                eConductivity.eConductivityVal = protobufManager.getECval()
+                waterPumpOfTank.pumpState = protobufManager.getPumpState()
+                valveOfTank.valveState = protobufManager.getValveState()
+                ledButton.buttonState = protobufManager.getLedState()
+                break;
 
-            // do stuff
+            case ProtobufManager.HEART_BEAT:
+
+                // do stuff
+                break;
+
+            case ProtobufManager.MESSAGE_OK:
+
+                // do stuff
+                break;
+
+            case ProtobufManager.MESSAGE_ERROR:
+
+                // do stuff
+                break;
+
+            case ProtobufManager.MESSAGE_TIMEOUT:
+
+                // do stuff
+                break;
+
+            default:
+                console.log("Invalid Message Type.")
+                break;
+            }
         }
-
     }
 
     Rectangle{
@@ -131,6 +162,14 @@ Item {
 
             pumpState: true
             pumpText: "Tank Water Pump"
+
+            onPumpClicked: {
+                if(pumpState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_PUMP_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_PUMP_OFF)
+            }
+
         }
 
         ValveIndicator{
@@ -143,6 +182,13 @@ Item {
 
             valveState: false
             valveLabel: "Valve State"
+
+            onValveClicked: {
+                if(valveOfTank.valveState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_VALVE_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_VALVE_OFF)
+            }
 
         }
 
@@ -157,6 +203,13 @@ Item {
 
             buttonText: "Led"
             buttonState: false
+
+            onButtonClicked: {
+                if(ledButton.buttonState)
+                    protobufManager.sendCommand(ProtobufManager.CMD_LED_ON)
+                else
+                    protobufManager.sendCommand(ProtobufManager.CMD_LED_OFF)
+            }
 
         }
 

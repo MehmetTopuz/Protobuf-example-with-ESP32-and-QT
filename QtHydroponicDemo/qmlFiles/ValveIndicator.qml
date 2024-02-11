@@ -6,6 +6,8 @@ Item {
     property bool valveState: false
     property string valveLabel: "None"
 
+    signal valveClicked()
+
     Rectangle{
         id: valveBackgroundRect
         width: parent.width
@@ -19,7 +21,8 @@ Item {
             anchors.bottom: valveImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: valveImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -48,6 +51,7 @@ Item {
                 hoverEnabled: true
                 onClicked: {
                     valveState = !valveState
+                    valveClicked()
                 }
             }
         }

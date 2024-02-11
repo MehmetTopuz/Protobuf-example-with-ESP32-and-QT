@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     id: eConductivityItem
 
-    property int eConductivityVal: 0
+    property double eConductivityVal: 0
     property string eConductivityLabel: "None"
 
     Rectangle{
@@ -19,7 +19,8 @@ Item {
             anchors.bottom: ecImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: ecImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -33,7 +34,7 @@ Item {
 
         Text{
             id: ecValText
-            text: qsTr(parseInt(eConductivityVal) + " ms/cm")
+            text: qsTr(eConductivityVal.toFixed(2) + " ms/cm")
             font.bold: true
             font.pointSize: 12
             anchors.top: ecImage.bottom
