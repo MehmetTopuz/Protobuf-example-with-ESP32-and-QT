@@ -19,7 +19,8 @@ Item {
             anchors.bottom: humidityImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: humidityImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image{

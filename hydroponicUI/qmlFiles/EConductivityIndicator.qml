@@ -19,7 +19,8 @@ Item {
             anchors.bottom: ecImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: ecImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {

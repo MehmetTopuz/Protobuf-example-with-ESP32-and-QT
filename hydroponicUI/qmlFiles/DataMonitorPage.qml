@@ -17,24 +17,44 @@ Item {
         onMessageReceived: {    // It will be triggered when a message is received.
             // check message type
 
-//            switch(protobufManager.getMessageType()){
-//            case
-//            }
+            switch(protobufManager.getMessageType()){
+            case ProtobufManager.DATA:
+                // get data
+                waterLevel.level = protobufManager.getWaterLevel()
+                temperature.temperatureVal = protobufManager.getTemperature()
+                ph.phVal = protobufManager.getPh()
+                humidity.humidityVal = protobufManager.getMoisture()
+                eConductivity.eConductivityVal = protobufManager.getECval()
+                waterPumpOfTank.pumpState = protobufManager.getPumpState()
+                valveOfTank.valveState = protobufManager.getValveState()
+                ledButton.buttonState = protobufManager.getLedState()
+                break;
 
-            waterLevel.level = protobufManager.getWaterLevel()
-            temperature.temperatureVal = protobufManager.getTemperature()
-            ph.phVal = protobufManager.getPh()
-            humidity.humidityVal = protobufManager.getMoisture()
-            eConductivity.eConductivityVal = protobufManager.getECval()
-            waterPumpOfTank.pumpState = protobufManager.getPumpState()
-            valveOfTank.valveState = protobufManager.getValveState()
-            ledButton.buttonState = protobufManager.getLedState()
+            case ProtobufManager.HEART_BEAT:
 
-            // do stuff
+                // do stuff
+                break;
 
-            console.log("Message received.")
+            case ProtobufManager.MESSAGE_OK:
+
+                // do stuff
+                break;
+
+            case ProtobufManager.MESSAGE_ERROR:
+
+                // do stuff
+                break;
+
+            case ProtobufManager.MESSAGE_TIMEOUT:
+
+                // do stuff
+                break;
+
+            default:
+                console.log("Invalid Message Type.")
+                break;
+            }
         }
-
     }
 
     Rectangle{

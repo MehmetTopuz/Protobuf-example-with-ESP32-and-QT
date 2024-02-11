@@ -2,6 +2,7 @@
 #define PROTOBUFMANAGER_H
 
 #include <QObject>
+#include <QMap>
 #include "hydroponic_data.pb.h"
 #include "udphandler.h"
 
@@ -68,9 +69,19 @@ private:
     HydroponicMessageType messageType;
 
     bool parseProtobuf(const QByteArray arr);
-    bool serializeToArray(QByteArray *buffer, hydroponic::Hydroponic message);
 
-    hydroponic::CMD cmdToHydroponicCmd(HydroponicCMD cmd); // We cannot access to hydroponic::CMD from QML
+    /*
+     * We cannot access an enum defined inside the Hydroponic class from QML.
+     * Therefore, I want to perform an enum conversion through a look-up table.
+     * */
+    QMap<HydroponicCMD,hydroponic::CMD> cmdLookUpTable = {
+        {HydroponicCMD::CMD_VALVE_ON, hydroponic::CMD::CMD_VALVE_ON},
+        {HydroponicCMD::CMD_VALVE_OFF, hydroponic::CMD::CMD_VALVE_OFF},
+        {HydroponicCMD::CMD_PUMP_ON, hydroponic::CMD::CMD_PUMP_ON},
+        {HydroponicCMD::CMD_PUMP_OFF, hydroponic::CMD::CMD_PUMP_OFF},
+        {HydroponicCMD::CMD_LED_ON, hydroponic::CMD::CMD_LED_ON},
+        {HydroponicCMD::CMD_LED_OFF, hydroponic::CMD::CMD_LED_OFF}
+    };
 };
 
 #endif // PROTOBUFMANAGER_H

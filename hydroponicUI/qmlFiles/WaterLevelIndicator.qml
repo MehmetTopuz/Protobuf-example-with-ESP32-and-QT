@@ -19,7 +19,8 @@ Item {
             anchors.bottom: waterTankImg.top
             anchors.bottomMargin: 5
             anchors.horizontalCenter: waterTankImg.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
         Image {
             id: waterTankImg

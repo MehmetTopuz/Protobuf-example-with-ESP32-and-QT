@@ -18,7 +18,8 @@ Item {
             anchors.bottom: temperatureImage.top
             anchors.bottomMargin: 5
             anchors.horizontalCenter: temperatureImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {

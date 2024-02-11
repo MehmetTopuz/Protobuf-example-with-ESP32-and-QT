@@ -21,7 +21,8 @@ Item {
             anchors.bottom: valveImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: valveImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {

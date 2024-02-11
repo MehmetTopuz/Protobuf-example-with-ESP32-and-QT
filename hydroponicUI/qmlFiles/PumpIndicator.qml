@@ -20,7 +20,8 @@ Item {
             anchors.bottom: pumpImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: pumpImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {
@@ -72,6 +73,20 @@ Item {
                 }
 
             }
+        }
+        Text {
+            id: stateText
+            text: {
+                if(pumpState)
+                    qsTr("ON")
+                else
+                    qsTr("OFF")
+            }
+            font.bold: true
+            font.pointSize: 12
+            anchors.top: pumpImage.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: pumpImage.horizontalCenter
         }
 
     }

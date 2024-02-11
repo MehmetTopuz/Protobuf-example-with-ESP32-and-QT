@@ -19,7 +19,8 @@ Item {
             anchors.bottom: phImage.top
             anchors.bottomMargin: 15
             anchors.horizontalCenter: phImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image{

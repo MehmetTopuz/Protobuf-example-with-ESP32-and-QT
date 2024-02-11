@@ -21,7 +21,8 @@ Item {
             anchors.bottom: buttonImage.top
             anchors.bottomMargin: 10
             anchors.horizontalCenter: buttonImage.horizontalCenter
-            color: "saddlebrown"
+            color: "midnightblue"
+            style: Text.Raised
         }
 
         Image {

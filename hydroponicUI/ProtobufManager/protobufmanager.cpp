@@ -78,7 +78,7 @@ void ProtobufManager::sendCommand(HydroponicCMD command)
     hydroponic::Hydroponic hydroponicMessage;
     hydroponic::Command cmdMessage;
 
-    cmdMessage.set_command(this->cmdToHydroponicCmd(command));
+    cmdMessage.set_command(this->cmdLookUpTable[command]);
     // set top level message to command message
 
     hydroponicMessage.set_allocated_cmd(&cmdMessage);
@@ -177,40 +177,4 @@ bool ProtobufManager::parseProtobuf(const QByteArray arr)
     emit messageReceived();
     return true;
 
-}
-
-bool ProtobufManager::serializeToArray(QByteArray *buffer, hydroponic::Hydroponic message)
-{
-
-    return false;
-}
-
-CMD ProtobufManager::cmdToHydroponicCmd(HydroponicCMD cmd)
-{
-    switch (cmd) {
-        case HydroponicCMD::CMD_VALVE_ON:
-        return hydroponic::CMD::CMD_VALVE_ON;
-        break;
-
-        case HydroponicCMD::CMD_VALVE_OFF:
-        return hydroponic::CMD::CMD_VALVE_OFF;
-        break;
-
-        case HydroponicCMD::CMD_PUMP_ON:
-        return hydroponic::CMD::CMD_PUMP_ON;
-        break;
-
-        case HydroponicCMD::CMD_PUMP_OFF:
-        return hydroponic::CMD::CMD_PUMP_OFF;
-        break;
-
-        case HydroponicCMD::CMD_LED_ON:
-        return hydroponic::CMD::CMD_LED_ON;
-        break;
-
-        case HydroponicCMD::CMD_LED_OFF:
-        return hydroponic::CMD::CMD_LED_OFF;
-        break;
-
-    }
 }
