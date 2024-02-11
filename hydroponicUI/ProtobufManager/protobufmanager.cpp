@@ -91,7 +91,8 @@ void ProtobufManager::sendCommand(HydroponicCMD command)
     hydroponicMessage.SerializeToArray(arr.data(), arr.size());
     // send to ESP32
 
-    this->udpHandler->sendBytes(arr, "192.168.1.35", 5000);
+    //this->udpHandler->sendBytes(arr, "192.168.1.35", 5000);
+    this->udpHandler->sendBytes(arr, this->udpHandler->getSenderAddress(), this->udpHandler->getSenderPort());
 
     // release
     hydroponicMessage.release_cmd();

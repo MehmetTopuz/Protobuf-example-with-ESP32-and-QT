@@ -34,9 +34,9 @@ UdpHandler::~UdpHandler()
         delete this->receiveBuffer;
 }
 
-quint64 UdpHandler::sendBytes(QByteArray arr, QString ip, quint16 port)
+quint64 UdpHandler::sendBytes(QByteArray arr, QHostAddress destIp, quint16 destPort)
 {
-    return this->socket->writeDatagram(arr, QHostAddress(ip), port);
+    return this->socket->writeDatagram(arr, destIp, destPort);
 }
 
 bool UdpHandler::isDataAvailable()
@@ -62,16 +62,23 @@ void UdpHandler::clearReceiveBuffer()
     this->receiveBuffer->clear();
 }
 
+QHostAddress UdpHandler::getSenderAddress()
+{
+    return this->sender;
+}
+
+quint16 UdpHandler::getSenderPort()
+{
+    return this->senderPort;
+}
+
 void UdpHandler::receiveHandler()
 {
-    QHostAddress sender;
-    quint16 senderPort;
-
     qInfo() << "Receive Handler called";
     this->receiveBuffer->resize(this->socket->pendingDatagramSize());
 
     while(this->socket->hasPendingDatagrams()){
-        this->socket->readDatagram(this->receiveBuffer->data(), this->receiveBuffer->size(), &sender, &senderPort);
+        this->socket->readDatagram(this->receiveBuffer->data(), this->receiveBuffer->size(), &this->sender, &this->senderPort);
     }
 
     this->isDataReceived = true;
