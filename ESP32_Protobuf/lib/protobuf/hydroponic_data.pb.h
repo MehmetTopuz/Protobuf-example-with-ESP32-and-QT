@@ -15,8 +15,18 @@ typedef enum _hydroponic_MessageType {
     hydroponic_MessageType_MSG_OK = 1,
     hydroponic_MessageType_MSG_ERROR = 2,
     hydroponic_MessageType_MSG_DATA = 3,
-    hydroponic_MessageType_MSG_TIMEOUT = 4
+    hydroponic_MessageType_MSG_TIMEOUT = 4,
+    hydroponic_MessageType_MSG_CMD = 5
 } hydroponic_MessageType;
+
+typedef enum _hydroponic_CMD {
+    hydroponic_CMD_CMD_VALVE_ON = 0,
+    hydroponic_CMD_CMD_VALVE_OFF = 1,
+    hydroponic_CMD_CMD_PUMP_ON = 2,
+    hydroponic_CMD_CMD_PUMP_OFF = 3,
+    hydroponic_CMD_CMD_LED_ON = 4,
+    hydroponic_CMD_CMD_LED_OFF = 5
+} hydroponic_CMD;
 
 /* Struct definitions */
 typedef struct _hydroponic_DataPackage {
@@ -48,6 +58,10 @@ typedef struct _hydroponic_MessageTimeout {
     pb_callback_t timeoutMessage;
 } hydroponic_MessageTimeout;
 
+typedef struct _hydroponic_Command {
+    hydroponic_CMD command;
+} hydroponic_Command;
+
 typedef struct _hydroponic_Hydroponic {
     hydroponic_MessageType messageType;
     pb_callback_t cb_msg;
@@ -58,6 +72,7 @@ typedef struct _hydroponic_Hydroponic {
         hydroponic_MessageOk messageOk;
         hydroponic_MessageError messageError;
         hydroponic_MessageTimeout messageTimeout;
+        hydroponic_Command cmd;
     } msg;
 } hydroponic_Hydroponic;
 
@@ -68,8 +83,12 @@ extern "C" {
 
 /* Helper constants for enums */
 #define _hydroponic_MessageType_MIN hydroponic_MessageType_MSG_HEART_BEAT
-#define _hydroponic_MessageType_MAX hydroponic_MessageType_MSG_TIMEOUT
-#define _hydroponic_MessageType_ARRAYSIZE ((hydroponic_MessageType)(hydroponic_MessageType_MSG_TIMEOUT+1))
+#define _hydroponic_MessageType_MAX hydroponic_MessageType_MSG_CMD
+#define _hydroponic_MessageType_ARRAYSIZE ((hydroponic_MessageType)(hydroponic_MessageType_MSG_CMD+1))
+
+#define _hydroponic_CMD_MIN hydroponic_CMD_CMD_VALVE_ON
+#define _hydroponic_CMD_MAX hydroponic_CMD_CMD_LED_OFF
+#define _hydroponic_CMD_ARRAYSIZE ((hydroponic_CMD)(hydroponic_CMD_CMD_LED_OFF+1))
 
 #define hydroponic_Hydroponic_messageType_ENUMTYPE hydroponic_MessageType
 
@@ -77,6 +96,8 @@ extern "C" {
 
 
 
+
+#define hydroponic_Command_command_ENUMTYPE hydroponic_CMD
 
 
 /* Initializer values for message structs */
@@ -86,12 +107,14 @@ extern "C" {
 #define hydroponic_MessageOk_init_default        {{{NULL}, NULL}}
 #define hydroponic_MessageError_init_default     {{{NULL}, NULL}}
 #define hydroponic_MessageTimeout_init_default   {{{NULL}, NULL}}
+#define hydroponic_Command_init_default          {_hydroponic_CMD_MIN}
 #define hydroponic_Hydroponic_init_zero          {_hydroponic_MessageType_MIN, {{NULL}, NULL}, 0, {hydroponic_DataPackage_init_zero}}
 #define hydroponic_DataPackage_init_zero         {0, {{NULL}, NULL}, 0, 0, 0, 0, 0, 0, 0, 0}
 #define hydroponic_HeartBeat_init_zero           {0}
 #define hydroponic_MessageOk_init_zero           {{{NULL}, NULL}}
 #define hydroponic_MessageError_init_zero        {{{NULL}, NULL}}
 #define hydroponic_MessageTimeout_init_zero      {{{NULL}, NULL}}
+#define hydroponic_Command_init_zero             {_hydroponic_CMD_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define hydroponic_DataPackage_deviceID_tag      2
@@ -108,12 +131,14 @@ extern "C" {
 #define hydroponic_MessageOk_responseMessage_tag 1
 #define hydroponic_MessageError_errorType_tag    1
 #define hydroponic_MessageTimeout_timeoutMessage_tag 1
+#define hydroponic_Command_command_tag           1
 #define hydroponic_Hydroponic_messageType_tag    1
 #define hydroponic_Hydroponic_dataPackage_tag    2
 #define hydroponic_Hydroponic_heartBeat_tag      3
 #define hydroponic_Hydroponic_messageOk_tag      4
 #define hydroponic_Hydroponic_messageError_tag   5
 #define hydroponic_Hydroponic_messageTimeout_tag 6
+#define hydroponic_Hydroponic_cmd_tag            7
 
 /* Struct field encoding specification for nanopb */
 #define hydroponic_Hydroponic_FIELDLIST(X, a) \
@@ -122,7 +147,8 @@ X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,dataPackage,msg.dataPackage),   2) \
 X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,heartBeat,msg.heartBeat),   3) \
 X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,messageOk,msg.messageOk),   4) \
 X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,messageError,msg.messageError),   5) \
-X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,messageTimeout,msg.messageTimeout),   6)
+X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,messageTimeout,msg.messageTimeout),   6) \
+X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,cmd,msg.cmd),   7)
 #define hydroponic_Hydroponic_CALLBACK NULL
 #define hydroponic_Hydroponic_DEFAULT NULL
 #define hydroponic_Hydroponic_msg_dataPackage_MSGTYPE hydroponic_DataPackage
@@ -130,6 +156,7 @@ X(a, STATIC,   ONEOF,    MSG_W_CB, (msg,messageTimeout,msg.messageTimeout),   6)
 #define hydroponic_Hydroponic_msg_messageOk_MSGTYPE hydroponic_MessageOk
 #define hydroponic_Hydroponic_msg_messageError_MSGTYPE hydroponic_MessageError
 #define hydroponic_Hydroponic_msg_messageTimeout_MSGTYPE hydroponic_MessageTimeout
+#define hydroponic_Hydroponic_msg_cmd_MSGTYPE hydroponic_Command
 
 #define hydroponic_DataPackage_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   deviceID,          2) \
@@ -165,12 +192,18 @@ X(a, CALLBACK, SINGULAR, STRING,   timeoutMessage,    1)
 #define hydroponic_MessageTimeout_CALLBACK pb_default_field_callback
 #define hydroponic_MessageTimeout_DEFAULT NULL
 
+#define hydroponic_Command_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UENUM,    command,           1)
+#define hydroponic_Command_CALLBACK NULL
+#define hydroponic_Command_DEFAULT NULL
+
 extern const pb_msgdesc_t hydroponic_Hydroponic_msg;
 extern const pb_msgdesc_t hydroponic_DataPackage_msg;
 extern const pb_msgdesc_t hydroponic_HeartBeat_msg;
 extern const pb_msgdesc_t hydroponic_MessageOk_msg;
 extern const pb_msgdesc_t hydroponic_MessageError_msg;
 extern const pb_msgdesc_t hydroponic_MessageTimeout_msg;
+extern const pb_msgdesc_t hydroponic_Command_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define hydroponic_Hydroponic_fields &hydroponic_Hydroponic_msg
@@ -179,6 +212,7 @@ extern const pb_msgdesc_t hydroponic_MessageTimeout_msg;
 #define hydroponic_MessageOk_fields &hydroponic_MessageOk_msg
 #define hydroponic_MessageError_fields &hydroponic_MessageError_msg
 #define hydroponic_MessageTimeout_fields &hydroponic_MessageTimeout_msg
+#define hydroponic_Command_fields &hydroponic_Command_msg
 
 /* Maximum encoded size of messages (where known) */
 /* hydroponic_Hydroponic_size depends on runtime parameters */
@@ -187,6 +221,7 @@ extern const pb_msgdesc_t hydroponic_MessageTimeout_msg;
 /* hydroponic_MessageError_size depends on runtime parameters */
 /* hydroponic_MessageTimeout_size depends on runtime parameters */
 #define HYDROPONIC_HYDROPONIC_DATA_PB_H_MAX_SIZE hydroponic_HeartBeat_size
+#define hydroponic_Command_size                  2
 #define hydroponic_HeartBeat_size                6
 
 #ifdef __cplusplus

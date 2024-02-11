@@ -275,9 +275,9 @@ void generateSampleHydroponicData(hydroponic_Hydroponic *message){
     if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.waterLevel = 0; else message->msg.dataPackage.waterLevel += 5;
     //if(message->msg.dataPackage.waterLevel >= 100) message->msg.dataPackage.valveState = false; else message->msg.dataPackage.valveState = true;
 
-    message->msg.dataPackage.valveState = !message->msg.dataPackage.valveState;
-    message->msg.dataPackage.pumpState = !message->msg.dataPackage.pumpState;
-    message->msg.dataPackage.ledStatus = !message->msg.dataPackage.ledStatus;
+    // message->msg.dataPackage.valveState = !message->msg.dataPackage.valveState;
+    // message->msg.dataPackage.pumpState = !message->msg.dataPackage.pumpState;
+    // message->msg.dataPackage.ledStatus = !message->msg.dataPackage.ledStatus;
 
 // sample HeartBeat Message
     // message->messageType = hydroponic_MessageType_MSG_HEART_BEAT;

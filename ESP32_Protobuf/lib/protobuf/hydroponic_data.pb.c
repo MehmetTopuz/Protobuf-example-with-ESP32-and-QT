@@ -24,5 +24,9 @@ PB_BIND(hydroponic_MessageError, hydroponic_MessageError, AUTO)
 PB_BIND(hydroponic_MessageTimeout, hydroponic_MessageTimeout, AUTO)
 
 
+PB_BIND(hydroponic_Command, hydroponic_Command, AUTO)
+
+
+
 
 

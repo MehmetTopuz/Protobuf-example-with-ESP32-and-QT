@@ -10,6 +10,16 @@ enum MessageType {
     MSG_ERROR = 2;
     MSG_DATA = 3;
     MSG_TIMEOUT = 4;
+	MSG_CMD = 5;
+}
+
+enum CMD {
+	CMD_VALVE_ON = 0;
+	CMD_VALVE_OFF = 1;
+	CMD_PUMP_ON = 2;
+	CMD_PUMP_OFF = 3;
+	CMD_LED_ON = 4;
+	CMD_LED_OFF = 5;
 }
 
 message Hydroponic {
@@ -21,6 +31,7 @@ message Hydroponic {
 		MessageOk messageOk = 4;
 		MessageError messageError = 5;
 		MessageTimeout messageTimeout = 6;
+		Command cmd = 7;
 	}	
 }
 
@@ -51,4 +62,8 @@ message MessageError {
 
 message MessageTimeout {
 	string timeoutMessage = 1;
+}
+
+message Command {
+	CMD command = 1;
 }
