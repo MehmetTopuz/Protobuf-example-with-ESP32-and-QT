@@ -27,5 +27,7 @@
         <file>icons/switch-on.png</file>
         <file>qmlFiles/CustomButton.qml</file>
         <file>icons/greenhouse.jpg</file>
+        <file>qmlFiles/CustomChart.qml</file>
+        <file>qmlFiles/CustomText.qml</file>
     </qresource>
 </RCC>
