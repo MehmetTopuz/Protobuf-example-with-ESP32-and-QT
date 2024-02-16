@@ -12,6 +12,8 @@
         "array": "c",
         "string_view": "c",
         "initializer_list": "c",
-        "protobuf_callbacks.h": "c"
+        "protobuf_callbacks.h": "c",
+        "freertos.h": "c",
+        "freertosconfig.h": "c"
     }
 }

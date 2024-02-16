@@ -5,6 +5,7 @@
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
 #include "freertos/queue.h"
+#include "freertos/semphr.h"
 #include "esp_log.h"
 #include "esp_system.h" 
 #include "esp_wifi.h"
@@ -28,6 +29,7 @@ static const char *TAG = "ESP32";
 static int udpSocket = -1;
 
 static QueueHandle_t commandQueue;
+static SemaphoreHandle_t socketMutex;
 
 //Temporary variables for testing purposes.
 
@@ -53,8 +55,8 @@ static int createSocket(){
 
         // Set timeout
     struct timeval timeout;
-    timeout.tv_sec = 10;
-    timeout.tv_usec = 0;
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 1000;
     setsockopt (sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof timeout);
 
     ESP_LOGI(TAG, "Socket created");
@@ -68,6 +70,8 @@ void initalizeTasks(void){
     BaseType_t retVal = pdPASS;
 
     commandQueue = xQueueCreate(10, sizeof(hydroponic_CMD));
+
+    socketMutex = xSemaphoreCreateMutex(); // for the socket variable.
 
     udpSocket = createSocket(); // create a global socket variable
 
@@ -103,10 +107,13 @@ void udpSenderTask(void *param){
 
         int size = serializeData(buffer, sizeof(buffer), &messageToSend);
         ESP_LOGI(TAG, "Size: %d", size);
+
+        xSemaphoreTake(socketMutex,portMAX_DELAY);
         int err = sendto(*(int*)param, buffer, size, 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
+        xSemaphoreGive(socketMutex);
+
         if (err < 0) {
             ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-            break;
         }
         ESP_LOGI(TAG, "Message sent");
 
@@ -124,8 +131,9 @@ void udpReceiverTask(void *param){
 
     while (1)
     {
+        xSemaphoreTake(socketMutex,portMAX_DELAY);
         int len = recvfrom(*(int*)param, buffer, sizeof(buffer) - 1, 0, (struct sockaddr *)&source_addr, &socklen);
-        
+        xSemaphoreGive(socketMutex);
         // Error occurred during receiving
         if (len < 0) {
             ESP_LOGE(TAG, "recvfrom failed: errno %d", errno);
@@ -193,6 +201,7 @@ void udpReceiverTask(void *param){
             }
 
         }
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
     
 }
