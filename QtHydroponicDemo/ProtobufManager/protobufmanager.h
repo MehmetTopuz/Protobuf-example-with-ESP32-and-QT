@@ -36,7 +36,7 @@ public:
     Q_ENUM(HydroponicCMD)
 
     Q_INVOKABLE ProtobufManager::HydroponicMessageType getMessageType();
-    Q_INVOKABLE uint32_t getDeviceId();
+    Q_INVOKABLE int getDeviceId();
     Q_INVOKABLE QString getSectorName();
     Q_INVOKABLE float getECval();
     Q_INVOKABLE float getPh();

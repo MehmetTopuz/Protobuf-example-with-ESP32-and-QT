@@ -36,4 +36,30 @@ Window {
         }
     }
 
+//    Component{
+//            id:animationPage
+
+//            AnimationPage{
+//                id:animation
+
+//            }
+//        }
+
+//        Component{
+//            id:loginPage
+
+//            LoginPage{
+//                id:login
+
+//            }
+//        }
+//        Component{
+//            id:mainPage
+
+//            MainPage{
+//                id:mainPage
+
+//            }
+//        }
+
 }
