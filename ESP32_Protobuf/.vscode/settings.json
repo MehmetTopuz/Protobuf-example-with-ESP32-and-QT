@@ -1,0 +1,19 @@
+{
+    "idf.portWin": "COM4",
+    "files.associations": {
+        "sdkconfig.h": "c",
+        "pb_common.h": "c",
+        "pb_decode.h": "c",
+        "pb_encode.h": "c",
+        "hydroponic_data.pb.h": "c",
+        "atomic": "c",
+        "cstdint": "c",
+        "system_error": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "protobuf_callbacks.h": "c",
+        "freertos.h": "c",
+        "freertosconfig.h": "c"
+    }
+}
