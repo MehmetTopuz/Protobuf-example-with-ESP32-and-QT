@@ -4,7 +4,7 @@
 ProtobufManager::ProtobufManager(QObject *parent) : QObject{parent}
 {
 
-    this->udpHandler = new UdpHandler("192.168.1.33", 5000);
+    this->udpHandler = new UdpHandler("192.168.1.34", 5000);
 
     connect(this->udpHandler, &UdpHandler::dataReceived, this, &ProtobufManager::packageReceived);
 
@@ -22,9 +22,13 @@ ProtobufManager::HydroponicMessageType ProtobufManager::getMessageType()
     return this->messageType;
 }
 
-uint32_t ProtobufManager::getDeviceId()
+int ProtobufManager::getDeviceId()
 {
-    return this->dataMessage.deviceid();
+    /*
+     *  There is no type such as uint32_t on the QML side.
+     *  It's possible there may be a loss of data, I know.
+     *  */
+    return (int)this->dataMessage.deviceid();
 }
 
 QString ProtobufManager::getSectorName()

@@ -14,17 +14,22 @@ Item {
 
     ProtobufManager{
         id: protobufManager
+
+        property  int xVal: 0
         onMessageReceived: {    // It will be triggered when a message is received.
             // check message type
 
             switch(protobufManager.getMessageType()){
             case ProtobufManager.DATA:
                 // get data
+                sectorText.txt = protobufManager.getSectorName()
+                deviceIdText.txt = protobufManager.getDeviceId()
                 waterLevel.level = protobufManager.getWaterLevel()
                 temperature.temperatureVal = protobufManager.getTemperature()
                 ph.phVal = protobufManager.getPh()
                 humidity.humidityVal = protobufManager.getMoisture()
-                eConductivity.eConductivityVal = protobufManager.getECval()
+                //eConductivity.eConductivityVal = protobufManager.getECval()
+                eConductivity.appendData(xVal++,protobufManager.getECval())
                 waterPumpOfTank.pumpState = protobufManager.getPumpState()
                 valveOfTank.valveState = protobufManager.getValveState()
                 ledButton.buttonState = protobufManager.getLedState()
@@ -81,14 +86,43 @@ Item {
 
         }
 
+
         CustomTopBar{
             id: topBarDataMonitor
             fullscreenFlag: true
         }
 
+        CustomText {
+            id: sectorText
+            anchors.top: topBarDataMonitor.bottom
+            anchors.topMargin: 20
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            width: 250
+            height: 50
+
+            label: "Zone:"
+            txtColor: "cornsilk"
+            backgroundColor: "cadetblue"
+        }
+
+        CustomText {
+            id: deviceIdText
+            anchors.top: topBarDataMonitor.bottom
+            anchors.topMargin: 20
+            anchors.left: sectorText.right
+            anchors.leftMargin: 50
+            width: 250
+            height: 50
+
+            label: "Device ID:"
+            txtColor: "cornsilk"
+            backgroundColor: "cadetblue"
+        }
+
         WaterLevelIndicator{
             id: waterLevel
-            anchors.top: topBarDataMonitor.bottom
+            anchors.top: sectorText.bottom
             anchors.topMargin: 50
             anchors.left: parent.left
             anchors.leftMargin: 50
@@ -102,7 +136,7 @@ Item {
 
         TemperatureIndicator{
             id:temperature
-            anchors.top: topBarDataMonitor.bottom
+            anchors.top: sectorText.bottom
             anchors.topMargin: 50
             anchors.left: waterLevel.right
             anchors.leftMargin: 50
@@ -115,7 +149,7 @@ Item {
 
         PhIndicator{
             id:ph
-            anchors.top: topBarDataMonitor.bottom
+            anchors.top: sectorText.bottom
             anchors.topMargin: 50
             anchors.left: temperature.right
             anchors.leftMargin: 50
@@ -140,7 +174,19 @@ Item {
 
         }
 
-        EConductivityIndicator{
+//        EConductivityIndicator{
+//            id: eConductivity
+//            width: 300
+//            height: 300
+//            anchors.top: humidity.top
+//            anchors.left: humidity.right
+//            anchors.leftMargin: 50
+
+//            eConductivityLabel: "EC Level"
+//            eConductivityVal: 25
+//        }
+
+        CustomChart {
             id: eConductivity
             width: 300
             height: 300
@@ -148,9 +194,11 @@ Item {
             anchors.left: humidity.right
             anchors.leftMargin: 50
 
-            eConductivityLabel: "EC Level"
-            eConductivityVal: 25
+            chartName: "EC Level"
+
+            //change the axes dynamically later.
         }
+
 
         PumpIndicator{
             id: waterPumpOfTank
@@ -160,7 +208,7 @@ Item {
             anchors.left: eConductivity.right
             anchors.leftMargin: 50
 
-            pumpState: true
+            pumpState: false
             pumpText: "Tank Water Pump"
 
             onPumpClicked: {
@@ -196,7 +244,7 @@ Item {
             id: ledButton
             width: 300
             height: 300
-            anchors.top: topBarDataMonitor.bottom
+            anchors.top: sectorText.bottom
             anchors.topMargin: 50
             anchors.left: ph.right
             anchors.leftMargin: 50
@@ -213,27 +261,5 @@ Item {
 
         }
 
-//        Timer{
-//            interval: 50
-//            running: true
-//            repeat: true
-//            onTriggered: {
-//                if(waterLevel.level != 100){
-//                    humidity.humidityVal++
-//                    waterLevel.level++
-//                }
-//                else{
-//                    humidity.humidityVal=0
-//                    waterLevel.level=0
-//                    waterPumpOfTank.pumpState=false
-//                }
-
-//                if(temperature.temperatureVal != 30)
-//                    temperature.temperatureVal++
-//                else
-//                    temperature.temperatureVal=0
-
-//            }
-//        }
     }
 }
